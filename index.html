@@ -148,6 +148,104 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-773-Sliding-Puzzle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/19/LeetCode-773-Sliding-Puzzle/">773. Sliding Puzzle</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/19/LeetCode-773-Sliding-Puzzle/" class="archive-article-date">
+  	<time datetime="2020-07-18T16:46:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="773-Sliding-Puzzle"><a href="#773-Sliding-Puzzle" class="headerlink" title="773. Sliding Puzzle"></a>773. Sliding Puzzle</h2><p>On a 2x3 board, there are 5 tiles represented by the integers 1 through 5, and an empty square represented by 0.</p>
+<p>A move consists of choosing 0 and a 4-directionally adjacent number and swapping it.</p>
+<p>The state of the board is solved if and only if the board is [[1,2,3],[4,5,0]].</p>
+<p>Given a puzzle board, return the least number of moves required so that the state of the board is solved. If it is impossible for the state of the board to be solved, return -1.</p>
+<p>题目大意：给你一个2×3的棋盘，放着0-5。每一步0可以和上下左右的一个数交换。问需要多少步可以构成123450的棋盘状态。</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
+<p>Input: board = [[1,2,3],[4,0,5]]<br>Output: 1<br>Explanation: Swap the 0 and the 5 in one move.</p>
+</blockquote>
+<h2 id="Example2"><a href="#Example2" class="headerlink" title="Example2"></a>Example2</h2><blockquote>
+<p>Input: board = [[4,1,2],[5,0,3]]<br>Output: 5<br>Explanation: 5 is the smallest number of moves that solves the board.<br>An example path:<br>After move 0: [[4,1,2],[5,0,3]]<br>After move 1: [[4,1,2],[0,5,3]]<br>After move 2: [[0,1,2],[4,5,3]]<br>After move 3: [[1,0,2],[4,5,3]]<br>After move 4: [[1,2,0],[4,5,3]]<br>After move 5: [[1,2,3],[4,5,0]]</p>
+</blockquote>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>Standard BFS visited is important to cut the branches.</li>
+<li>2d - 1d int x = p % kCols; int y = p / kCols;</li>
+<li>size –;</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time: O(6!)</li>
+<li>Space: O(6!)</li>
+</ul>
+<h2 id="Code-Method1"><a href="#Code-Method1" class="headerlink" title="Code: Method1"></a>Code: Method1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">slidingPuzzle</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; board)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">constexpr</span> <span class="keyword">int</span> kRows = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">constexpr</span> <span class="keyword">int</span> kCols = <span class="number">3</span>;</span><br><span class="line">        <span class="built_in">string</span> start;</span><br><span class="line">        <span class="built_in">string</span> goal = <span class="string">"123450"</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dir = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; board.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; board[<span class="number">0</span>].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                start += to_string(board[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="built_in">string</span>&gt; q;</span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; visited&#123;start&#125;;</span><br><span class="line">        q.push(start);</span><br><span class="line">        <span class="keyword">int</span> <span class="built_in">step</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> <span class="built_in">size</span> = q.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">while</span> (<span class="built_in">size</span> --)&#123;                    <span class="comment">// each layer</span></span><br><span class="line">                <span class="built_in">string</span> cur = q.front();</span><br><span class="line">                q.pop();</span><br><span class="line">                <span class="keyword">if</span> (cur == goal) <span class="keyword">return</span> <span class="built_in">step</span>;</span><br><span class="line">                <span class="keyword">int</span> p = cur.<span class="built_in">find</span>(<span class="string">"0"</span>);</span><br><span class="line">                <span class="keyword">int</span> x = p % kCols;</span><br><span class="line">                <span class="keyword">int</span> y = p / kCols;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">                    <span class="keyword">int</span> dx = x + dir[i][<span class="number">0</span>];</span><br><span class="line">                    <span class="keyword">int</span> dy = y + dir[i][<span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span> (dx &lt; <span class="number">0</span> || dx &gt;= kCols || dy &lt; <span class="number">0</span> || dy &gt;= kRows) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">int</span> pp = dy * kCols + dx;    <span class="comment">// 2d - 1d</span></span><br><span class="line">                    <span class="function"><span class="built_in">string</span> <span class="title">f</span><span class="params">(cur)</span></span>;</span><br><span class="line">                    swap(f[p], f[pp]);</span><br><span class="line">                    <span class="keyword">if</span> (visited.count(f) != <span class="number">0</span>) <span class="keyword">continue</span>;   <span class="comment">//important to cut the branches</span></span><br><span class="line">                    q.push(f);</span><br><span class="line">                    visited.insert(f);     <span class="comment">// important</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">step</span>++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/19/LeetCode-773-Sliding-Puzzle/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-787-Cheapest-Flights-Within-K-Stops" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -183,7 +281,8 @@
 <li>There will not be any duplicated flights or self cycles.</li>
 </ul>
 </blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><blockquote>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><p><img src="https://zxi.mytechroad.com/blog/wp-content/uploads/2018/02/787-ep170.png" alt="solusion"></p>
+<blockquote>
 <ul>
 <li>DP<ol>
 <li>init: dp[0:k+2][src] = 0</li>
@@ -658,6 +757,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">DP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hard</a>
               </li>
             
             <div class="clearfix"></div>
