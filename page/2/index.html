@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Trie | Jamie&#39;s blog</title>
+  <title>Jamie&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Jamie&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/Trie/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Jamie&#39;s blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Jamie Gao">
@@ -148,34 +148,54 @@
           <div id="js-content" class="content-ll">
             
   
-  
+    <article id="post-Leetcode-166" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/19/LeetCode-336-Palindrome-Pairs/" class="archive-article-date">
-  	<time datetime="2020-07-19T11:18:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/19/LeetCode-336-Palindrome-Pairs/">LeetCode 336. Palindrome Pairs</a>
+      <a class="article-title" href="/2020/07/18/Leetcode-166/">Leetcode 166</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/07/18/Leetcode-166/" class="archive-article-date">
+  	<time datetime="2020-07-18T10:07:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Fraction to Recurring Decimal</p>
+<hr>
+<p>Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.</p>
+<p>If the fractional part is repeating, enclose the repeating part in parentheses.</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
+<p>Input: numerator = 1, denominator = 2<br>Output: “0.5”</p>
+</blockquote>
+<h2 id="Example2"><a href="#Example2" class="headerlink" title="Example2"></a>Example2</h2><blockquote>
+<p>Input: numerator = 2, denominator = 3<br>Output: “0.(6)”</p>
+</blockquote>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>Use the Long Division to find when the remainder repeats.</li>
+<li>Use hash map to store the remainder and the repeated pos.</li>
+<li>long int.</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time: O(n)</li>
+<li>Space: O(n)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">fractionToDecimal</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> den)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (den == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">        <span class="built_in">string</span> ans = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span> (num &gt; <span class="number">0</span> ^ den &gt; <span class="number">0</span>) ans += <span class="string">"-"</span>;   <span class="comment">// xor</span></span><br><span class="line">        <span class="keyword">long</span> n = <span class="built_in">labs</span>(num), d = <span class="built_in">labs</span>(den);</span><br><span class="line">        <span class="keyword">auto</span> r = n % d;</span><br><span class="line">        ans += to_string(n/d);</span><br><span class="line">        <span class="keyword">if</span> (!r) <span class="keyword">return</span> ans;</span><br><span class="line">        ans += <span class="string">"."</span>;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">long</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">        <span class="keyword">while</span> (r) &#123;</span><br><span class="line">            <span class="keyword">if</span> (m.<span class="built_in">find</span>(r) != m.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                ans.insert(m[r], <span class="string">"("</span>);  <span class="comment">// string,insert</span></span><br><span class="line">                ans += <span class="string">")"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            m[r] = ans.<span class="built_in">size</span>();</span><br><span class="line">            r *= <span class="number">10</span>;    <span class="comment">// important</span></span><br><span class="line">            ans += to_string(r/d);</span><br><span class="line">            r %= d;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -185,37 +205,55 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Palindrome String</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Trie</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/18/Leetcode-166/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 
 
           </div>
@@ -237,10 +275,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
