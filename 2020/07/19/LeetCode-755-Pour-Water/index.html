@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/7 | Jamie&#39;s blog</title>
+  <title>LeetCode 755. Pour Water | Jamie&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jamie&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/archives/2020/07/page/2/index.html">
+  <meta name="description" content="755. Pour WaterWe are given an elevation map, heights[i] representing the height of the terrain at that index. The width at each index is 1. After V units of water fall at index K, how much water is a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 755. Pour Water">
+<meta property="og:url" content="http://yoursite.com/2020/07/19/LeetCode-755-Pour-Water/index.html">
 <meta property="og:site_name" content="Jamie&#39;s blog">
+<meta property="og:description" content="755. Pour WaterWe are given an elevation map, heights[i] representing the height of the terrain at that index. The width at each index is 1. After V units of water fall at index K, how much water is a">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-19T15:11:13.000Z">
+<meta property="article:modified_time" content="2020-07-19T15:20:44.624Z">
 <meta property="article:author" content="Jamie Gao">
+<meta property="article:tag" content="Medium">
+<meta property="article:tag" content="Array">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Jamie&#39;s blog" type="application/atom+xml">
@@ -146,36 +152,72 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetCode-755-Pour-Water" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/18/LeetCode-251-Flatten-2D-Vector/" class="archive-article-date">
-  	<time datetime="2020-07-18T12:36:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/18/LeetCode-251-Flatten-2D-Vector/">LeetCode 251 Flatten 2D Vector</a>
+    <h1 class="article-title" itemprop="name">
+      LeetCode 755. Pour Water
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/07/19/LeetCode-755-Pour-Water/" class="archive-article-date">
+  	<time datetime="2020-07-19T15:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="755-Pour-Water"><a href="#755-Pour-Water" class="headerlink" title="755. Pour Water"></a>755. Pour Water</h2><p>We are given an elevation map, heights[i] representing the height of the terrain at that index. The width at each index is 1. After V units of water fall at index K, how much water is at each index?</p>
+<p>Water first drops at index K and rests on top of the highest terrain or water at that index. Then, it flows according to the following rules:</p>
+<p>If the droplet would eventually fall by moving left, then move left.<br>Otherwise, if the droplet would eventually fall by moving right, then move right.<br>Otherwise, rise at it’s current position.<br>Here, “eventually fall” means that the droplet will eventually be at a lower level if it moves in that direction. Also, “level” means the height of the terrain plus any water in that column.<br>We can assume there’s infinitely high terrain on the two sides out of bounds of the array. Also, there could not be partial water being spread out evenly on more than 1 grid block - each unit of water has to be in exactly one block.</p>
+<p>题目大意：每次从K漏雨，看漏到什么位置，如果平的请最靠近原来位置不到tail。</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
+<p>Input: heights = [1,2,3,4], V = 2, K = 2<br>Output: [2,3,3,4]<br>Explanation:<br>The last droplet settles at index 1, since moving further left would not cause it to eventually fall to a lower height.</p>
+</blockquote>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><p>heights will have length in [1, 100] and contain integers in [0, 99].<br>V will be in range [0, 2000].<br>K will be in range [0, heights.length - 1].</p>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>first look up the left side find the last position that could be compare to right if smaller update.</li>
+<li>then right if already check then next drop.</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time: O(n*V)</li>
+<li>Space: O(1)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">pourWater</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights, <span class="keyword">int</span> V, <span class="keyword">int</span> K)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(V--) &#123;</span><br><span class="line">            drop(heights, K);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> heights;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">drop</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights, <span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> right = K;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">-1</span>; i &lt;= <span class="number">1</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> d = right + i;</span><br><span class="line">            <span class="keyword">while</span> (d &gt;= <span class="number">0</span> &amp;&amp; d &lt;= heights.<span class="built_in">size</span>() - <span class="number">1</span> &amp;&amp; heights[d] &lt;= heights[d - i])&#123;</span><br><span class="line">                <span class="keyword">if</span> (heights[d] &lt; heights[right]) right = d;  </span><br><span class="line">                <span class="comment">//0001x000 not 1000x000</span></span><br><span class="line">                d += i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (right != K) <span class="keyword">break</span>;</span><br><span class="line">            <span class="comment">// to check right if left doesn't update</span></span><br><span class="line">        &#125;</span><br><span class="line">        heights[right]++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>THX!<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -185,82 +227,111 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Design</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Two Pointer</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Iterator</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Array</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/19/LeetCode-755-Pour-Water/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/18/Leetcode-166/" class="archive-article-date">
-  	<time datetime="2020-07-18T10:07:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/19/LeetCode-39-Combination-Sum/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 39. Combination Sum</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/18/Leetcode-166/">Leetcode 166</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HashTable</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2020/07/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2020/07/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
   
 
 
@@ -284,8 +355,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
