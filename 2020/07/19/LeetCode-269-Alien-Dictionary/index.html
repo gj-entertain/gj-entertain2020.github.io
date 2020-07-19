@@ -6,14 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Two Pointer | Jamie&#39;s blog</title>
+  <title>LeetCode 269. Alien Dictionary | Jamie&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jamie&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/Two-Pointer/index.html">
+  <meta name="description" content="269. Alien DictionaryThere is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of non-empty words from the dictionary, where">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 269. Alien Dictionary">
+<meta property="og:url" content="http://yoursite.com/2020/07/19/LeetCode-269-Alien-Dictionary/index.html">
 <meta property="og:site_name" content="Jamie&#39;s blog">
+<meta property="og:description" content="269. Alien DictionaryThere is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of non-empty words from the dictionary, where">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-19T15:51:17.000Z">
+<meta property="article:modified_time" content="2020-07-19T16:02:55.339Z">
 <meta property="article:author" content="Jamie Gao">
+<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="BFS">
+<meta property="article:tag" content="Hard">
+<meta property="article:tag" content="Topological Sort">
+<meta property="article:tag" content="Graph">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Jamie&#39;s blog" type="application/atom+xml">
@@ -146,72 +155,197 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetCode-269-Alien-Dictionary" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/18/LeetCode-251-Flatten-2D-Vector/" class="archive-article-date">
-  	<time datetime="2020-07-18T12:36:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/18/LeetCode-251-Flatten-2D-Vector/">LeetCode 251 Flatten 2D Vector</a>
+    <h1 class="article-title" itemprop="name">
+      LeetCode 269. Alien Dictionary
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/07/19/LeetCode-269-Alien-Dictionary/" class="archive-article-date">
+  	<time datetime="2020-07-19T15:51:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="269-Alien-Dictionary"><a href="#269-Alien-Dictionary" class="headerlink" title="269. Alien Dictionary"></a>269. Alien Dictionary</h2><p>There is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of non-empty words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.</p>
+<p>大意：给例子找规则。</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
+<p>Input:<br>[<br>  “wrt”,<br>  “wrf”,<br>  “er”,<br>  “ett”,<br>  “rftt”<br>]<br>Output: “wertf”</p>
+</blockquote>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><p>You may assume all letters are in lowercase.<br>If the order is invalid, return an empty string.<br>There may be multiple valid order of letters, return any one of them is fine.</p>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>make graph and indegrees.</li>
+<li>BFS to find the ans only indegree[i] == 0.</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time: O(V+E)</li>
+<li>Space: O(V+E)</li>
+</ul>
+<h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">alienOrder</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">string</span> ans;</span><br><span class="line">        isTopo = <span class="literal">true</span>;</span><br><span class="line">        make_graph(words);</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">char</span>&gt; q;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> ele : indegree) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ele.second == <span class="number">0</span>) &#123;</span><br><span class="line">                q.push(ele.first);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            <span class="keyword">char</span> c = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            ans.push_back(c);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> neighs : graph[c]) &#123;</span><br><span class="line">                indegree[neighs]--;</span><br><span class="line">                <span class="keyword">if</span> (indegree[neighs] == <span class="number">0</span>) q.push(neighs);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (ans.length() == indegree.<span class="built_in">size</span>()) &amp;&amp; isTopo? ans : <span class="string">""</span>;  <span class="comment">// judge cycle exist</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="built_in">unordered_set</span>&lt;<span class="keyword">char</span>&gt;&gt; graph;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; indegree;</span><br><span class="line">    <span class="keyword">bool</span> isTopo;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">make_graph</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> c : words[i]) &#123;</span><br><span class="line">                indegree[c] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.<span class="built_in">size</span>() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="built_in">string</span> cur = words[i];</span><br><span class="line">            <span class="built_in">string</span> next = words[i + <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> len = <span class="built_in">min</span>(cur.length(), next.length());</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (cur[j] != next[j]) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (graph[cur[j]].count(next[j]) == <span class="number">0</span>) &#123;</span><br><span class="line">                        graph[cur[j]].emplace(next[j]);</span><br><span class="line">                        indegree[next[j]]++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>; <span class="comment">//ignore the useless digits</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (j == len - <span class="number">1</span> &amp;&amp; cur.<span class="built_in">size</span>() &gt; next.<span class="built_in">size</span>()) isTopo = <span class="literal">false</span>; <span class="comment">// corner case : abc ab</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>THX!<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Design</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Two Pointer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Iterator</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Topological Sort</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Graph</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/19/LeetCode-269-Alien-Dictionary/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/07/19/LeetCode-210-Course-Schedule-II/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 210. Course Schedule II</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -234,9 +368,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
