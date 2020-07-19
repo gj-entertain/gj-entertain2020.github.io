@@ -6,15 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Hash Table | Jamie&#39;s blog</title>
+  <title>LeetCode 759. Employee Free Time | Jamie&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jamie&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/Hash-Table/index.html">
+  <meta name="description" content="759. Employee Free TimeWe are given a list schedule of employees, which represents the working time for each employee. Each employee has a list of non-overlapping Intervals, and these intervals are in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 759. Employee Free Time">
+<meta property="og:url" content="http://yoursite.com/2020/07/19/LeetCode-759-Employee-Free-Time/index.html">
 <meta property="og:site_name" content="Jamie&#39;s blog">
+<meta property="og:description" content="759. Employee Free TimeWe are given a list schedule of employees, which represents the working time for each employee. Each employee has a list of non-overlapping Intervals, and these intervals are in">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zxi.mytechroad.com/blog/wp-content/uploads/2018/01/759-ep154.png">
+<meta property="article:published_time" content="2020-07-19T13:42:25.000Z">
+<meta property="article:modified_time" content="2020-07-19T13:50:20.955Z">
 <meta property="article:author" content="Jamie Gao">
+<meta property="article:tag" content="Hard">
+<meta property="article:tag" content="Greedy">
+<meta property="article:tag" content="Virtual Merge">
+<meta property="article:tag" content="Geometry">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zxi.mytechroad.com/blog/wp-content/uploads/2018/01/759-ep154.png">
   
     <link rel="alternative" href="/atom.xml" title="Jamie&#39;s blog" type="application/atom+xml">
   
@@ -146,36 +156,75 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetCode-759-Employee-Free-Time" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/19/LeetCode-336-Palindrome-Pairs/" class="archive-article-date">
-  	<time datetime="2020-07-19T11:18:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/19/LeetCode-336-Palindrome-Pairs/">LeetCode 336. Palindrome Pairs</a>
+    <h1 class="article-title" itemprop="name">
+      LeetCode 759. Employee Free Time
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/07/19/LeetCode-759-Employee-Free-Time/" class="archive-article-date">
+  	<time datetime="2020-07-19T13:42:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="759-Employee-Free-Time"><a href="#759-Employee-Free-Time" class="headerlink" title="759. Employee Free Time"></a>759. Employee Free Time</h2><p>We are given a list schedule of employees, which represents the working time for each employee.</p>
+<p>Each employee has a list of non-overlapping Intervals, and these intervals are in sorted order.</p>
+<p>Return the list of finite intervals representing common, positive-length free time for all employees, also in sorted order.</p>
+<p>(Even though we are representing Intervals in the form [x, y], the objects inside are Intervals, not lists or arrays. For example, schedule[0][0].start = 1, schedule[0][0].end = 2, and schedule[0][0][0] is not defined).  Also, we wouldn’t include intervals like [5, 5] in our answer, as they have zero length.</p>
+<p>题目大意：给你每个员工的日历，让你找出所有员工都有空的时间段。</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
+<p>Input: schedule = [[[1,2],[5,6]],[[1,3]],[[4,10]]]<br>Output: [[3,4]]<br>Explanation: There are a total of three employees, and all common<br>free time intervals would be [-inf, 1], [3, 4], [10, inf].<br>We discard any intervals that contain inf as they aren’t finite.</p>
+</blockquote>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><p>1 &lt;= schedule.length , schedule[i].length &lt;= 50<br>0 &lt;= schedule[i].start &lt; schedule[i].end &lt;= 10^8</p>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><p><img src="https://zxi.mytechroad.com/blog/wp-content/uploads/2018/01/759-ep154.png" alt="huahua"></p>
+<ol>
+<li>transfer 2d-1d amd sorted by start time;</li>
+<li>iterate all interval to virtual merge the overlapped ones and updated the ans if have gap.</li>
+<li>use emplace_back to construct not push_back cause not a const value type.</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time: O(nlog(n))(2500)</li>
+<li>Space: O(n)(2500)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">// Definition for an Interval.</span></span><br><span class="line"><span class="comment">class Interval &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int start;</span></span><br><span class="line"><span class="comment">    int end;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Interval() &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Interval(int _start, int _end) &#123;</span></span><br><span class="line"><span class="comment">        start = _start;</span></span><br><span class="line"><span class="comment">        end = _end;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;Interval&gt; <span class="title">employeeFreeTime</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Interval&gt;&gt; schedule)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;Interval&gt; all;</span><br><span class="line">        <span class="built_in">vector</span>&lt;Interval&gt; ans;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> Intervals : schedule) &#123;</span><br><span class="line">            all.insert(all.<span class="built_in">end</span>(), Intervals.<span class="built_in">begin</span>(), Intervals.<span class="built_in">end</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        sort(all.<span class="built_in">begin</span>(), all.<span class="built_in">end</span>(), [](Interval a, Interval b) &#123;<span class="keyword">return</span> a.start &lt; b.start; &#125;);</span><br><span class="line">        <span class="keyword">int</span> max_end = all[<span class="number">0</span>].<span class="built_in">end</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> interval : all) &#123;</span><br><span class="line">            <span class="keyword">if</span> (interval.start &gt; max_end) &#123;</span><br><span class="line">                ans.emplace_back(max_end, interval.start); <span class="comment">//important</span></span><br><span class="line">                max_end = interval.<span class="built_in">end</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            max_end = <span class="built_in">max</span>(max_end, interval.<span class="built_in">end</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>THX!<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -185,37 +234,120 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Greedy</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Palindrome String</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Virtual Merge</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Trie</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Hash Table</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Geometry</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/19/LeetCode-759-Employee-Free-Time/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/07/19/LeetCode-1257-Smallest-Common-Region/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 1257. Smallest Common Region</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -238,9 +370,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -364,7 +496,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Hash Table</a>
+                <a href="javascript:void(0)" class="js-tag color2">Greedy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Virtual Merge</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Geometry</a>
               </li>
             
             <div class="clearfix"></div>
