@@ -6,21 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>LeetCode 206. Reverse Linked List | Jamie&#39;s blog</title>
+  <title>LeetCode 142. Linked List Cycle II | Jamie&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="LeetCode 206. Reverse Linked ListReverse a singly linked list. Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both? Example1 Input: 1-&gt;2-&gt;3-&gt;4">
+  <meta name="description" content="142. Linked List Cycle IIGiven a linked list, return the node where the cycle begins. If there is no cycle, return null. To represent a cycle in the given linked list, we use an integer pos which repr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 206. Reverse Linked List">
-<meta property="og:url" content="http://yoursite.com/2020/07/21/LeetCode-206-Reverse-Linked-List/index.html">
+<meta property="og:title" content="LeetCode 142. Linked List Cycle II">
+<meta property="og:url" content="http://yoursite.com/2020/07/21/LeetCode-142-Linked-List-Cycle-II/index.html">
 <meta property="og:site_name" content="Jamie&#39;s blog">
-<meta property="og:description" content="LeetCode 206. Reverse Linked ListReverse a singly linked list. Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both? Example1 Input: 1-&gt;2-&gt;3-&gt;4">
+<meta property="og:description" content="142. Linked List Cycle IIGiven a linked list, return the node where the cycle begins. If there is no cycle, return null. To represent a cycle in the given linked list, we use an integer pos which repr">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-20T16:07:54.000Z">
-<meta property="article:modified_time" content="2020-07-20T16:17:42.751Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png">
+<meta property="article:published_time" content="2020-07-20T16:21:08.000Z">
+<meta property="article:modified_time" content="2020-07-20T16:30:14.778Z">
 <meta property="article:author" content="Jamie Gao">
+<meta property="article:tag" content="Medium">
+<meta property="article:tag" content="Two Pointer">
 <meta property="article:tag" content="Linked List">
-<meta property="article:tag" content="Easy">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png">
   
     <link rel="alternative" href="/atom.xml" title="Jamie&#39;s blog" type="application/atom+xml">
   
@@ -152,44 +155,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-LeetCode-206-Reverse-Linked-List" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-LeetCode-142-Linked-List-Cycle-II" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode 206. Reverse Linked List
+      LeetCode 142. Linked List Cycle II
     </h1>
   
 
         
-        <a href="/2020/07/21/LeetCode-206-Reverse-Linked-List/" class="archive-article-date">
-  	<time datetime="2020-07-20T16:07:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-21</time>
+        <a href="/2020/07/21/LeetCode-142-Linked-List-Cycle-II/" class="archive-article-date">
+  	<time datetime="2020-07-20T16:21:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="LeetCode-206-Reverse-Linked-List"><a href="#LeetCode-206-Reverse-Linked-List" class="headerlink" title="LeetCode 206. Reverse Linked List"></a>LeetCode 206. Reverse Linked List</h2><p>Reverse a singly linked list.</p>
-<p>Follow up:</p>
-<p>A linked list can be reversed either iteratively or recursively. Could you implement both?</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
+        <h2 id="142-Linked-List-Cycle-II"><a href="#142-Linked-List-Cycle-II" class="headerlink" title="142. Linked List Cycle II"></a>142. Linked List Cycle II</h2><p>Given a linked list, return the node where the cycle begins. If there is no cycle, return null.</p>
+<p>To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail connects to. If pos is -1, then there is no cycle in the linked list.</p>
+<p>Note: Do not modify the linked list.</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><p><img src="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png" alt="lc"></p>
+<blockquote>
+<p>Input: head = [3,2,0,-4], pos = 1<br>Output: tail connects to node index 1<br>Explanation: There is a cycle in the linked list, where tail connects to the second node.</p>
 </blockquote>
 <h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>use prev, cur, next to reset the pointers between them.</li>
-<li>when update check where NULL.</li>
-<li>if recursion, remember it is done from the tail however iteration done form the front.</li>
+<li>To understand this solution, you just need to ask yourself these question.<br>Assume the distance from head to the start of the loop is x1<br>the distance from the start of the loop to the point fast and slow meet is x2<br>the distance from the point fast and slow meet to the start of the loop is x3<br>What is the distance fast moved? What is the distance slow moved? And their relationship?</li>
 </ol>
+<p>x1 + x2 + x3 + x2<br>x1 + x2<br>x1 + x2 + x3 + x2 = 2 (x1 + x2)<br>Thus x1 = x3<br>2. First use fast and slow pointer to check isCycle and find the pos that it meet and then one from head one from meeting if meet again this is the place.</p>
 <h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
 <li>Time complexity: O(n)</li>
 <li>Space complexity: O(1)</li>
 </ul>
-<h2 id="Iteration"><a href="#Iteration" class="headerlink" title="Iteration"></a>Iteration</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode* prev = <span class="literal">nullptr</span>, * cur = head, *next = head-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (cur) &#123;</span><br><span class="line">            cur-&gt;next = prev;</span><br><span class="line">            prev = cur;</span><br><span class="line">            cur = next;</span><br><span class="line">            <span class="keyword">if</span>(cur) next = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Recursion"><a href="#Recursion" class="headerlink" title="Recursion"></a>Recursion</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head || !head-&gt;next) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode* newNode = reverseList(head-&gt;next);</span><br><span class="line">        head-&gt;next-&gt;next = head;</span><br><span class="line">        head-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> newNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">bool</span> iscycle = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (!head || !head-&gt;next)                       <span class="comment">//important</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* slow = head-&gt;next, *fast = head-&gt;next-&gt;next, *meeting = <span class="keyword">new</span> ListNode();  <span class="comment">//important</span></span><br><span class="line">        <span class="keyword">while</span>(slow &amp;&amp; fast &amp;&amp; fast-&gt;next) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slow == fast) &#123;</span><br><span class="line">                meeting = slow;</span><br><span class="line">                iscycle = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!iscycle) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* l1 = head, *l2 = meeting;</span><br><span class="line">        <span class="keyword">while</span>(l1 &amp;&amp; l2) &#123;</span><br><span class="line">            <span class="keyword">if</span> (l1 == l2)</span><br><span class="line">                <span class="keyword">return</span> l1;</span><br><span class="line">            l1 = l1-&gt;next;</span><br><span class="line">            l2 = l2-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*To understand this solution, you just need to ask yourself these question.</span></span><br><span class="line"><span class="comment">Assume the distance from head to the start of the loop is x1</span></span><br><span class="line"><span class="comment">the distance from the start of the loop to the point fast and slow meet is x2</span></span><br><span class="line"><span class="comment">the distance from the point fast and slow meet to the start of the loop is x3</span></span><br><span class="line"><span class="comment">What is the distance fast moved? What is the distance slow moved? And their relationship?</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">x1 + x2 + x3 + x2</span></span><br><span class="line"><span class="comment">x1 + x2</span></span><br><span class="line"><span class="comment">x1 + x2 + x3 + x2 = 2 (x1 + x2)</span></span><br><span class="line"><span class="comment">Thus x1 = x3</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Finally got the idea.*/</span></span><br></pre></td></tr></table></figure>
 
       
 
@@ -224,11 +225,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Linked List</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Two Pointer</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Linked List</a>
         		</li>
       		
 		</ul>
@@ -284,7 +289,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/21/LeetCode-206-Reverse-Linked-List/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/21/LeetCode-142-Linked-List-Cycle-II/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -298,18 +303,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/07/21/LeetCode-142-Linked-List-Cycle-II/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          LeetCode 142. Linked List Cycle II
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/07/20/LeetCode-24-Swap-Nodes-in-Pairs/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">LeetCode 24. Swap Nodes in Pairs</div>
+    <a href="/2020/07/21/LeetCode-206-Reverse-Linked-List/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 206. Reverse Linked List</div>
       <i class="icon-circle-right"></i>
     </a>
   
