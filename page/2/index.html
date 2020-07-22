@@ -148,6 +148,195 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-206-Reverse-Linked-List" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/21/LeetCode-206-Reverse-Linked-List/">LeetCode 206. Reverse Linked List</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/21/LeetCode-206-Reverse-Linked-List/" class="archive-article-date">
+  	<time datetime="2020-07-20T16:07:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="LeetCode-206-Reverse-Linked-List"><a href="#LeetCode-206-Reverse-Linked-List" class="headerlink" title="LeetCode 206. Reverse Linked List"></a>LeetCode 206. Reverse Linked List</h2><p>Reverse a singly linked list.</p>
+<p>Follow up:</p>
+<p>A linked list can be reversed either iteratively or recursively. Could you implement both?</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
+<p>Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
+</blockquote>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>use prev, cur, next to reset the pointers between them.</li>
+<li>when update check where NULL.</li>
+<li>if recursion, remember it is done from the tail however iteration done form the front.</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time complexity: O(n)</li>
+<li>Space complexity: O(1)</li>
+</ul>
+<h2 id="Iteration"><a href="#Iteration" class="headerlink" title="Iteration"></a>Iteration</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode* prev = <span class="literal">nullptr</span>, * cur = head, *next = head-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (cur) &#123;</span><br><span class="line">            cur-&gt;next = prev;</span><br><span class="line">            prev = cur;</span><br><span class="line">            cur = next;</span><br><span class="line">            <span class="keyword">if</span>(cur) next = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Recursion"><a href="#Recursion" class="headerlink" title="Recursion"></a>Recursion</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head || !head-&gt;next) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode* newNode = reverseList(head-&gt;next);</span><br><span class="line">        head-&gt;next-&gt;next = head;</span><br><span class="line">        head-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> newNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Linked List</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/21/LeetCode-206-Reverse-Linked-List/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-LeetCode-24-Swap-Nodes-in-Pairs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/20/LeetCode-24-Swap-Nodes-in-Pairs/">LeetCode 24. Swap Nodes in Pairs</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/20/LeetCode-24-Swap-Nodes-in-Pairs/" class="archive-article-date">
+  	<time datetime="2020-07-20T15:59:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="LeetCode-24-Swap-Nodes-in-Pairs"><a href="#LeetCode-24-Swap-Nodes-in-Pairs" class="headerlink" title="LeetCode 24. Swap Nodes in Pairs"></a>LeetCode 24. Swap Nodes in Pairs</h2><p>Given a linked list, swap every two adjacent nodes and return its head.</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
+<p>Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.</p>
+</blockquote>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><ul>
+<li>Your algorithm should use only constant extra space.</li>
+<li>You may not modify the values in the list’s nodes, only nodes itself may be changed.</li>
+</ul>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>use prev, cur1, cur2, next to reset the pointers between them.</li>
+<li>when update check where NULL.</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time complexity: O(n)</li>
+<li>Space complexity: O(1)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">swapPairs</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head || !head-&gt;next) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode* prev = <span class="literal">nullptr</span>, *cur1 = head, *cur2 = head-&gt;next;</span><br><span class="line">        ListNode* next = cur2-&gt;next;</span><br><span class="line">        ListNode* newhead = cur2;</span><br><span class="line">        <span class="keyword">while</span>(cur1 &amp;&amp; cur2) &#123;</span><br><span class="line">            cur2-&gt;next = cur1;</span><br><span class="line">            cur1-&gt;next = next;</span><br><span class="line">            <span class="keyword">if</span>(prev) prev-&gt;next = cur2;</span><br><span class="line">            prev = cur1;</span><br><span class="line">            cur1 = cur1-&gt;next;</span><br><span class="line">            <span class="keyword">if</span>(cur1) cur2 = cur1-&gt;next;</span><br><span class="line">            <span class="keyword">if</span>(cur2) next = cur2-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> newhead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Linked List</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/20/LeetCode-24-Swap-Nodes-in-Pairs/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-445-Add-Two-Numbers-II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -929,207 +1118,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/07/19/LeetCode-759-Employee-Free-Time/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-1257-Smallest-Common-Region" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/19/LeetCode-1257-Smallest-Common-Region/">LeetCode 1257. Smallest Common Region</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/19/LeetCode-1257-Smallest-Common-Region/" class="archive-article-date">
-  	<time datetime="2020-07-19T12:08:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1257-Smallest-Common-Region"><a href="#1257-Smallest-Common-Region" class="headerlink" title="1257. Smallest Common Region"></a>1257. Smallest Common Region</h2><p>You are given some lists of regions where the first region of each list includes all other regions in that list.</p>
-<p>Naturally, if a region X contains another region Y then X is bigger than Y. Also by definition a region X contains itself.</p>
-<p>Given two regions region1, region2, find out the smallest region that contains both of them.</p>
-<p>If you are given regions r1, r2 and r3 such that r1 includes r3, it is guaranteed there is no r2 such that r2 includes r3.</p>
-<p>It’s guaranteed the smallest region exists.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Input:<br>regions = [[“Earth”,”North America”,”South America”],<br>[“North America”,”United States”,”Canada”],<br>[“United States”,”New York”,”Boston”],<br>[“Canada”,”Ontario”,”Quebec”],<br>[“South America”,”Brazil”]],<br>region1 = “Quebec”,<br>region2 = “New York”<br>Output: “North America”</p>
-</blockquote>
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><ul>
-<li>2 &lt;= regions.length &lt;= 10^4</li>
-<li>region1 != region2</li>
-<li>All strings consist of English letters and spaces with at most 20 letters.</li>
-</ul>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>use hashmap store all parent;</li>
-<li>use hashset store all ancestor of region1.</li>
-<li>check set during parenting region2.</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(n) n : total nums of regions</li>
-<li>Space: O(n)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">findSmallestRegion</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;&amp; regions, <span class="built_in">string</span> region1, <span class="built_in">string</span> region2)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; parent;</span><br><span class="line">        <span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; ancestor;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; regions.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; regions[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                parent[regions[i][j]] = regions[i][<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (region1 != <span class="string">""</span>) &#123;</span><br><span class="line">            ancestor.emplace(region1);</span><br><span class="line">            region1 = parent[region1];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (region2 != <span class="string">""</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ancestor.<span class="built_in">find</span>(region2) != ancestor.<span class="built_in">end</span>()) <span class="keyword">return</span> region2;</span><br><span class="line">            region2 = parent[region2];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tree</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/19/LeetCode-1257-Smallest-Common-Region/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-336-Palindrome-Pairs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/19/LeetCode-336-Palindrome-Pairs/">LeetCode 336. Palindrome Pairs</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/19/LeetCode-336-Palindrome-Pairs/" class="archive-article-date">
-  	<time datetime="2020-07-19T11:18:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="336-Palindrome-Pairs"><a href="#336-Palindrome-Pairs" class="headerlink" title="336. Palindrome Pairs"></a>336. Palindrome Pairs</h2><p>Given a list of unique words, find all pairs of distinct indices (i, j) in the given list, so that the concatenation of the two words, i.e. words[i] + words[j] is a palindrome.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Input: [“abcd”,”dcba”,”lls”,”s”,”sssll”]<br>Output: [[0,1],[1,0],[3,2],[2,4]]<br>Explanation: The palindromes are [“dcbaabcd”,”abcddcba”,”slls”,”llssssll”]</p>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>Edge case “” + self</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(n*k^2)</li>
-<li>Space: O(n*k)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">palindromePairs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> <span class="keyword">word</span> : words) &#123;</span><br><span class="line">            reverse(<span class="keyword">word</span>.<span class="built_in">begin</span>(), <span class="keyword">word</span>.<span class="built_in">end</span>());</span><br><span class="line">            m[<span class="keyword">word</span>] = index++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="comment">// edge case: if empty string "" exists, find all palindromes to become pairs ("", self)</span></span><br><span class="line">            <span class="keyword">if</span> (m.<span class="built_in">find</span>(<span class="string">""</span>) != m.<span class="built_in">end</span>() &amp;&amp; isPalindrome(words[i]) &amp;&amp; m[<span class="string">""</span>] != i) ans.push_back(&#123;m[<span class="string">""</span>], i&#125;);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; words[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="built_in">string</span> left = words[i].substr(<span class="number">0</span>, j);</span><br><span class="line">                <span class="built_in">string</span> right = words[i].substr(j, words[i].<span class="built_in">size</span>() - j);</span><br><span class="line">                <span class="comment">// for "llsss", "sll"</span></span><br><span class="line">                <span class="comment">// when j=2 left = "lls"; right="ss"; m["lls"] is exists,</span></span><br><span class="line">                <span class="comment">// so if right is palindrome, the pair is palindrome</span></span><br><span class="line">                <span class="keyword">if</span> (m.<span class="built_in">find</span>(left) != m.<span class="built_in">end</span>() &amp;&amp; isPalindrome(right) &amp;&amp; m[left] != i) </span><br><span class="line">                    ans.push_back(&#123;i, m[left]&#125;);      <span class="comment">// 2) when j = 0, left = "", right = self, so here covers concatenate(self, "")</span></span><br><span class="line">                <span class="comment">// for "lls", "sssll"</span></span><br><span class="line">                <span class="comment">// when j=2 left = "ss";right="sll"; m["lls"] is exists,</span></span><br><span class="line">                <span class="comment">// so if left is palindrome, the pair is palindrome</span></span><br><span class="line">                <span class="keyword">if</span> (m.<span class="built_in">find</span>(right) != m.<span class="built_in">end</span>() &amp;&amp; isPalindrome(left) &amp;&amp; m[right] != i)</span><br><span class="line">                    ans.push_back(&#123;m[right], i&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:  </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="built_in">string</span> <span class="keyword">word</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = <span class="keyword">word</span>.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">word</span>[l++] != <span class="keyword">word</span>[r--]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HashTable</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Palindrome String</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Trie</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/19/LeetCode-336-Palindrome-Pairs/">Read More >></a>
         </p>
       
 
