@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Stack | Jamie&#39;s blog</title>
+  <title>LeetCode 1249. Minimum Remove to Make Valid Parentheses | Jamie&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jamie&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/Stack/index.html">
+  <meta name="description" content="LeetCode 1249. Minimum Remove to Make Valid ParenthesesGiven a string s of ‘(‘ , ‘)’ and lowercase English characters.  Your task is to remove the minimum number of parentheses ( ‘(‘ or ‘)’, in any po">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 1249. Minimum Remove to Make Valid Parentheses">
+<meta property="og:url" content="http://yoursite.com/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/index.html">
 <meta property="og:site_name" content="Jamie&#39;s blog">
+<meta property="og:description" content="LeetCode 1249. Minimum Remove to Make Valid ParenthesesGiven a string s of ‘(‘ , ‘)’ and lowercase English characters.  Your task is to remove the minimum number of parentheses ( ‘(‘ or ‘)’, in any po">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-22T15:35:09.000Z">
+<meta property="article:modified_time" content="2020-07-22T15:43:32.528Z">
 <meta property="article:author" content="Jamie Gao">
+<meta property="article:tag" content="Medium">
+<meta property="article:tag" content="String">
+<meta property="article:tag" content="Stack">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Jamie&#39;s blog" type="application/atom+xml">
@@ -146,36 +153,76 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/" class="archive-article-date">
-  	<time datetime="2020-07-22T15:35:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-22</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/">LeetCode 1249. Minimum Remove to Make Valid Parentheses</a>
+    <h1 class="article-title" itemprop="name">
+      LeetCode 1249. Minimum Remove to Make Valid Parentheses
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/" class="archive-article-date">
+  	<time datetime="2020-07-22T15:35:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses"><a href="#LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses" class="headerlink" title="LeetCode 1249. Minimum Remove to Make Valid Parentheses"></a>LeetCode 1249. Minimum Remove to Make Valid Parentheses</h2><p>Given a string s of ‘(‘ , ‘)’ and lowercase English characters. </p>
+<p>Your task is to remove the minimum number of parentheses ( ‘(‘ or ‘)’, in any positions ) so that the resulting parentheses string is valid and return any valid string.</p>
+<p>Formally, a parentheses string is valid if and only if:</p>
+<p>It is the empty string, contains only lowercase characters, or<br>It can be written as AB (A concatenated with B), where A and B are valid strings, or<br>It can be written as (A), where A is a valid string.</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
+<p>Input: s = “lee(t(c)o)de)”<br>Output: “lee(t(c)o)de”<br>Explanation: “lee(t(co)de)” , “lee(t(c)ode)” would also be accepted.</p>
+</blockquote>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><ul>
+<li>1 &lt;= s.length &lt;= 10^5</li>
+<li>s[i] is one of  ‘(‘ , ‘)’ and lowercase English letters.</li>
+</ul>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>Use stack to store the not fitting char’s index and use ‘*’ to placeholder</li>
+<li>Use string.erase(begin, newend)</li>
+<li>NewEnd is remove(begin, end, ‘c’)</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(n)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">minRemoveToMakeValid</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;pair&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt;&gt; charStack;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i] == <span class="string">'('</span>) charStack.emplace(s[i], i);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (s[i] == <span class="string">')'</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!charStack.empty() &amp;&amp; charStack.top().first == <span class="string">'('</span>) charStack.pop();</span><br><span class="line">                <span class="keyword">else</span> charStack.emplace(s[i], i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="built_in">string</span> <span class="title">ans</span><span class="params">(s)</span></span>;</span><br><span class="line">        <span class="keyword">while</span> (!charStack.empty()) &#123;</span><br><span class="line">            ans[charStack.top().second] = <span class="string">'!'</span>;</span><br><span class="line">            charStack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        ans.erase(<span class="built_in">remove</span>(ans.<span class="built_in">begin</span>(), ans.<span class="built_in">end</span>(), <span class="string">'!'</span>), ans.<span class="built_in">end</span>());  <span class="comment">//important</span></span><br><span class="line">        <span class="comment">// 把下一个不是val向前覆盖，最后要erase(newEnd,end());</span></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Method 2 Placeholder</span></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">minRemoveToMakeValid</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">'('</span>) st.push(i);</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">')'</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!st.empty()) st.pop();</span><br><span class="line">            <span class="keyword">else</span> s[i] = <span class="string">'*'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!st.empty()) &#123;</span><br><span class="line">        s[st.top()] = <span class="string">'*'</span>;</span><br><span class="line">        st.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        s.erase(<span class="built_in">remove</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>(), <span class="string">'*'</span>), s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>THX!<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -195,69 +242,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/20/LeetCode-445-Add-Two-Numbers-II/" class="archive-article-date">
-  	<time datetime="2020-07-20T15:51:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-20</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/21/LeetCode-707-Design-Linked-List/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 707 Design Linked List</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/20/LeetCode-445-Add-Two-Numbers-II/">LeetCode 445. Add Two Numbers II</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Linked List</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Stack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -280,9 +364,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
