@@ -148,6 +148,113 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-1235-Maximum-Profit-in-Job-Scheduling" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/19/LeetCode-1235-Maximum-Profit-in-Job-Scheduling/">LeetCode 1235. Maximum Profit in Job Scheduling</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/19/LeetCode-1235-Maximum-Profit-in-Job-Scheduling/" class="archive-article-date">
+  	<time datetime="2020-07-19T08:26:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1235-Maximum-Profit-in-Job-Scheduling"><a href="#1235-Maximum-Profit-in-Job-Scheduling" class="headerlink" title="1235. Maximum Profit in Job Scheduling"></a>1235. Maximum Profit in Job Scheduling</h2><p>We have n jobs, where every job is scheduled to be done from startTime[i] to endTime[i], obtaining a profit of profit[i].</p>
+<p>You’re given the startTime , endTime and profit arrays, you need to output the maximum profit you can take such that there are no 2 jobs in the subset with overlapping time range.</p>
+<p>If you choose a job that ends at time X you will be able to start another job that starts at time X.</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><p><img src="https://assets.leetcode.com/uploads/2019/10/10/sample1_1584.png" alt="lee"></p>
+<blockquote>
+<p>Input: startTime = [1,2,3,3], endTime = [3,4,5,6], profit = [50,10,40,70] Output: 120<br>Explanation: The subset chosen is the first and fourth job.<br>Time range [1-3]+[3-6] , we get profit of 120 = 50 + 70.</p>
+</blockquote>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><blockquote>
+<ul>
+<li>1 &lt;= startTime.length == endTime.length == profit.length &lt;= 5 * 10^4</li>
+<li>1 &lt;= startTime[i] &lt; endTime[i] &lt;= 10^9</li>
+<li>1 &lt;= profit[i] &lt;= 10^4</li>
+</ul>
+</blockquote>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>1-D DP dp[n] = max(dp[n - 1], dp[bs] + profit);</li>
+<li>Binary Search to find the last end time that is prev(upper_bound) of the current start time.</li>
+<li>always remember to use indx[i] to locate the 3 vectors.</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time: O(nlog(n))</li>
+<li>Space: O(n)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">jobScheduling</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; startTime, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; endTime, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; profit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = startTime.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">indx</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            indx[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(indx.<span class="built_in">begin</span>(), indx.<span class="built_in">end</span>(), [&amp;endTime] (<span class="keyword">int</span> a, <span class="keyword">int</span> b) &#123;<span class="keyword">return</span> endTime[a] &lt; endTime[b];&#125;);</span><br><span class="line">        <span class="keyword">auto</span> binarySearch = [&amp;startTime, &amp;endTime, &amp;indx] (<span class="keyword">int</span> i) &#123;  <span class="comment">//inner define</span></span><br><span class="line">            <span class="keyword">int</span> start = startTime[indx[i]];</span><br><span class="line">            <span class="keyword">int</span> l = <span class="number">0</span>, r = i;</span><br><span class="line">            <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">                <span class="keyword">int</span> mid = l + (r - l)/<span class="number">2</span>;</span><br><span class="line">                <span class="keyword">if</span> (endTime[indx[mid]] &lt;= start) l = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> r = mid;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> r - <span class="number">1</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = profit[indx[<span class="number">0</span>]];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> pos = binarySearch(i);</span><br><span class="line">            <span class="keyword">int</span> cur = (pos != <span class="number">-1</span>) ? dp[pos] + profit[indx[i]] : profit[indx[i]];</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>], cur);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Using-map"><a href="#Using-map" class="headerlink" title="Using map"></a>Using map</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">jobScheduling</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; startTime, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; endTime, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; profit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = startTime.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; jobs;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            jobs.push_back(&#123;endTime[i], startTime[i], profit[i]&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(jobs.<span class="built_in">begin</span>(), jobs.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; dp = &#123;&#123;<span class="number">0</span>, <span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; job : jobs) &#123;</span><br><span class="line">            <span class="keyword">int</span> cur = prev(dp.upper_bound(job[<span class="number">1</span>]))-&gt;second + job[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">if</span> (cur &gt; dp.rbegin()-&gt;second)</span><br><span class="line">                dp[job[<span class="number">0</span>]] = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp.rbegin()-&gt;second;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Binary Search</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/19/LeetCode-1235-Maximum-Profit-in-Job-Scheduling/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-864-Shortest-Path-to-Get-All-Keys" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -882,6 +989,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Recursion</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">First Solved</a>
               </li>
             
             <div class="clearfix"></div>
