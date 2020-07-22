@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Jamie&#39;s blog</title>
+  <title>LeetCode 84. Largest Rectangle in Histogram | Jamie&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jamie&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+  <meta name="description" content="DescrptionGiven n non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.  Example1 Input: [2,1,5,6,2,3]Out">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 84. Largest Rectangle in Histogram">
+<meta property="og:url" content="http://yoursite.com/2020/07/23/LeetCode-84-Largest-Rectangle-in-Histogram/index.html">
 <meta property="og:site_name" content="Jamie&#39;s blog">
+<meta property="og:description" content="DescrptionGiven n non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.  Example1 Input: [2,1,5,6,2,3]Out">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2018/10/12/histogram_area.png">
+<meta property="og:image" content="https://www.z4a.net/image/20200723041737.T4T9u2">
+<meta property="article:published_time" content="2020-07-22T19:42:19.000Z">
+<meta property="article:modified_time" content="2020-07-22T20:21:07.324Z">
 <meta property="article:author" content="Jamie Gao">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="Hard">
+<meta property="article:tag" content="Stack">
+<meta property="article:tag" content="Mono Stack">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2018/10/12/histogram_area.png">
   
     <link rel="alternative" href="/atom.xml" title="Jamie&#39;s blog" type="application/atom+xml">
   
@@ -146,364 +157,67 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-LeetCode-875-Koko-Eating-Bananas" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-LeetCode-84-Largest-Rectangle-in-Histogram" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/19/LeetCode-875-Koko-Eating-Bananas/">LeetCode 875. Koko Eating Bananas</a>
+    <h1 class="article-title" itemprop="name">
+      LeetCode 84. Largest Rectangle in Histogram
     </h1>
   
 
         
-        <a href="/2020/07/19/LeetCode-875-Koko-Eating-Bananas/" class="archive-article-date">
-  	<time datetime="2020-07-19T09:26:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
+        <a href="/2020/07/23/LeetCode-84-Largest-Rectangle-in-Histogram/" class="archive-article-date">
+  	<time datetime="2020-07-22T19:42:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="875-Koko-Eating-Bananas"><a href="#875-Koko-Eating-Bananas" class="headerlink" title="875. Koko Eating Bananas"></a>875. Koko Eating Bananas</h2><p>Koko loves to eat bananas.  There are N piles of bananas, the i-th pile has piles[i] bananas.  The guards have gone and will come back in H hours.</p>
-<p>Koko can decide her bananas-per-hour eating speed of K.  Each hour, she chooses some pile of bananas, and eats K bananas from that pile.  If the pile has less than K bananas, she eats all of them instead, and won’t eat any more bananas during this hour.</p>
-<p>Koko likes to eat slowly, but still wants to finish eating all the bananas before the guards come back.</p>
-<p>Return the minimum integer K such that she can eat all the bananas within H hours.</p>
+        <h2 id="Descrption"><a href="#Descrption" class="headerlink" title="Descrption"></a>Descrption</h2><p>Given n non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/10/12/histogram_area.png" alt="lc"></p>
 <h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Input: piles = [3,6,7,11], H = 8<br>Output: 4</p>
+<p>Input: [2,1,5,6,2,3]<br>Output: 10</p>
 </blockquote>
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><blockquote>
-<ul>
-<li>1 &lt;= piles.length &lt;= 10^4</li>
-<li>piles.length &lt;= H &lt;= 10^9</li>
-<li>1 &lt;= piles[i] &lt;= 10^9</li>
-</ul>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>Follow certain rule that is whether possible to find all bananas &gt;&gt; Binary Search.</li>
-<li>start from 1.</li>
-<li>eg. 1-6 / 6 = 1 : (pile - 1)/ K + 1</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(nlog(n))</li>
-<li>Space: O(1)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minEatingSpeed</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; piles, <span class="keyword">int</span> H)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">1</span>, r = <span class="number">1e9</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = l + (r - l)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (!possible(piles, H, mid)) l = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> r = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">possible</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; piles, <span class="keyword">int</span> H, <span class="keyword">int</span> K)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> time = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> pile : piles) &#123;</span><br><span class="line">            time += (pile - <span class="number">1</span>)/K + <span class="number">1</span>;    <span class="comment">//important</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> time &lt;= H;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Binary Search</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/19/LeetCode-875-Koko-Eating-Bananas/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-1235-Maximum-Profit-in-Job-Scheduling" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/19/LeetCode-1235-Maximum-Profit-in-Job-Scheduling/">LeetCode 1235. Maximum Profit in Job Scheduling</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/19/LeetCode-1235-Maximum-Profit-in-Job-Scheduling/" class="archive-article-date">
-  	<time datetime="2020-07-19T08:26:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1235-Maximum-Profit-in-Job-Scheduling"><a href="#1235-Maximum-Profit-in-Job-Scheduling" class="headerlink" title="1235. Maximum Profit in Job Scheduling"></a>1235. Maximum Profit in Job Scheduling</h2><p>We have n jobs, where every job is scheduled to be done from startTime[i] to endTime[i], obtaining a profit of profit[i].</p>
-<p>You’re given the startTime , endTime and profit arrays, you need to output the maximum profit you can take such that there are no 2 jobs in the subset with overlapping time range.</p>
-<p>If you choose a job that ends at time X you will be able to start another job that starts at time X.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><p><img src="https://assets.leetcode.com/uploads/2019/10/10/sample1_1584.png" alt="lee"></p>
-<blockquote>
-<p>Input: startTime = [1,2,3,3], endTime = [3,4,5,6], profit = [50,10,40,70] Output: 120<br>Explanation: The subset chosen is the first and fourth job.<br>Time range [1-3]+[3-6] , we get profit of 120 = 50 + 70.</p>
-</blockquote>
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><blockquote>
-<ul>
-<li>1 &lt;= startTime.length == endTime.length == profit.length &lt;= 5 * 10^4</li>
-<li>1 &lt;= startTime[i] &lt; endTime[i] &lt;= 10^9</li>
-<li>1 &lt;= profit[i] &lt;= 10^4</li>
-</ul>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>1-D DP dp[n] = max(dp[n - 1], dp[bs] + profit);</li>
-<li>Binary Search to find the last end time that is prev(upper_bound) of the current start time.</li>
-<li>always remember to use indx[i] to locate the 3 vectors.</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(nlog(n))</li>
-<li>Space: O(n)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">jobScheduling</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; startTime, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; endTime, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; profit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = startTime.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">indx</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            indx[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(indx.<span class="built_in">begin</span>(), indx.<span class="built_in">end</span>(), [&amp;endTime] (<span class="keyword">int</span> a, <span class="keyword">int</span> b) &#123;<span class="keyword">return</span> endTime[a] &lt; endTime[b];&#125;);</span><br><span class="line">        <span class="keyword">auto</span> binarySearch = [&amp;startTime, &amp;endTime, &amp;indx] (<span class="keyword">int</span> i) &#123;  <span class="comment">//inner define</span></span><br><span class="line">            <span class="keyword">int</span> start = startTime[indx[i]];</span><br><span class="line">            <span class="keyword">int</span> l = <span class="number">0</span>, r = i;</span><br><span class="line">            <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">                <span class="keyword">int</span> mid = l + (r - l)/<span class="number">2</span>;</span><br><span class="line">                <span class="keyword">if</span> (endTime[indx[mid]] &lt;= start) l = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> r = mid;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> r - <span class="number">1</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(n, <span class="number">0</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = profit[indx[<span class="number">0</span>]];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> pos = binarySearch(i);</span><br><span class="line">            <span class="keyword">int</span> cur = (pos != <span class="number">-1</span>) ? dp[pos] + profit[indx[i]] : profit[indx[i]];</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>], cur);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Using-map"><a href="#Using-map" class="headerlink" title="Using map"></a>Using map</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">jobScheduling</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; startTime, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; endTime, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; profit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = startTime.<span class="built_in">size</span>();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; jobs;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            jobs.push_back(&#123;endTime[i], startTime[i], profit[i]&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(jobs.<span class="built_in">begin</span>(), jobs.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; dp = &#123;&#123;<span class="number">0</span>, <span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; job : jobs) &#123;</span><br><span class="line">            <span class="keyword">int</span> cur = prev(dp.upper_bound(job[<span class="number">1</span>]))-&gt;second + job[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">if</span> (cur &gt; dp.rbegin()-&gt;second)</span><br><span class="line">                dp[job[<span class="number">0</span>]] = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp.rbegin()-&gt;second;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Binary Search</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/19/LeetCode-1235-Maximum-Profit-in-Job-Scheduling/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-864-Shortest-Path-to-Get-All-Keys" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/19/LeetCode-864-Shortest-Path-to-Get-All-Keys/">LeetCode 864. Shortest Path to Get All Keys</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/19/LeetCode-864-Shortest-Path-to-Get-All-Keys/" class="archive-article-date">
-  	<time datetime="2020-07-18T18:36:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="864-Shortest-Path-to-Get-All-Keys"><a href="#864-Shortest-Path-to-Get-All-Keys" class="headerlink" title="864. Shortest Path to Get All Keys"></a>864. Shortest Path to Get All Keys</h2><p>We are given a 2-dimensional grid. “.” is an empty cell, “#” is a wall, “@” is the starting point, (“a”, “b”, …) are keys, and (“A”, “B”, …) are locks.</p>
-<p>We start at the starting point, and one move consists of walking one space in one of the 4 cardinal directions.  We cannot walk outside the grid, or walk into a wall.  If we walk over a key, we pick it up.  We can’t walk over a lock unless we have the corresponding key.</p>
-<p>For some 1 &lt;= K &lt;= 6, there is exactly one lowercase and one uppercase letter of the first K letters of the English alphabet in the grid.  This means that there is exactly one key for each lock, and one lock for each key; and also that the letters used to represent the keys and locks were chosen in the same order as the English alphabet.</p>
-<p>Return the lowest number of moves to acquire all keys.  If it’s impossible, return -1.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Input: [“@.a.#”,”###.#”,”b.A.B”]<br>Output: 8</p>
-</blockquote>
-<h2 id="Example2"><a href="#Example2" class="headerlink" title="Example2"></a>Example2</h2><blockquote>
-<p>Input: [“@..aA”,”..B#.”,”….b”]<br>Output: 6</p>
-</blockquote>
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><blockquote>
-<p>1 &lt;= grid.length &lt;= 30<br>1 &lt;= grid[0].length &lt;= 30<br>grid[i][j] contains only ‘.’, ‘#’, ‘@’, ‘a’-‘f’ and ‘A’-‘F’<br>The number of keys is in [1, 6].  Each key has a different letter and opens exactly one lock.</p>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><p><img src="https://zxi.mytechroad.com/blog/wp-content/uploads/2018/07/865-ep205-1.png" alt="huahua"></p>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><p><img src="https://www.z4a.net/image/20200723041737.T4T9u2" alt="leetcode"></p>
 <ol>
-<li>Bit maniputation to record three status (x, y, key)</li>
-<li>BFS template and record visited</li>
+<li>Bruce force for a certain height find the max width. o(n^2) Space: (o(1))</li>
+<li>Trade off space to better time complexity we find when the next column is lower we can fix the right edge the scheme looks like stack and here is a mono stack</li>
+<li>The width should be i - (pop(); then top() +1)</li>
+<li>Use sentiniel (similar to dummy nodes) not to judge empty and at the end.</li>
 </ol>
 <h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(m<em>n</em>2^6)</li>
-<li>Space: O(m<em>n</em>2^6)</li>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(n)</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">shortestPathAllKeys</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = grid.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> n = grid[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> all_key = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&gt; <span class="title">visited</span><span class="params">(m, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;(n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">64</span>, <span class="number">0</span>)))</span></span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dirs = &#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> status;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                <span class="keyword">char</span> c = grid[i][j];</span><br><span class="line">                <span class="keyword">if</span> (c == <span class="string">'@'</span>) &#123;</span><br><span class="line">                    status = (i &lt;&lt; <span class="number">16</span>) | (j &lt;&lt; <span class="number">8</span>);</span><br><span class="line">                    q.push(status);</span><br><span class="line">                    visited[i][j][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= <span class="string">'a'</span> &amp;&amp; c &lt;= <span class="string">'f'</span>) &#123;</span><br><span class="line">                    all_key |= <span class="number">1</span> &lt;&lt; (c - <span class="string">'a'</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> <span class="built_in">step</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> <span class="built_in">size</span> = q.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">while</span> (<span class="built_in">size</span>--) &#123;</span><br><span class="line">                <span class="keyword">auto</span> cur = q.front();</span><br><span class="line">                q.pop();</span><br><span class="line">                <span class="keyword">int</span> x = cur &gt;&gt; <span class="number">16</span>;</span><br><span class="line">                <span class="keyword">int</span> y = (cur &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xFF</span>;                          <span class="comment">// cool</span></span><br><span class="line">                <span class="keyword">int</span> key = cur &amp; <span class="number">0xFF</span>;                               <span class="comment">// cool</span></span><br><span class="line">                <span class="keyword">if</span> (key == all_key) <span class="keyword">return</span> <span class="built_in">step</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">                    <span class="keyword">int</span> nkey = key;</span><br><span class="line">                    <span class="keyword">int</span> dx = x + dirs[i];</span><br><span class="line">                    <span class="keyword">int</span> dy = y + dirs[i + <span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span> (dx &lt; <span class="number">0</span> || dx &gt;= m || dy &lt; <span class="number">0</span> || dy &gt;= n) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">char</span> p = grid[dx][dy];</span><br><span class="line">                    <span class="keyword">if</span> (grid[dx][dy] == <span class="string">'#'</span>) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">if</span> (visited[dx][dy][nkey]) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">if</span> (p &gt;= <span class="string">'A'</span> &amp;&amp; p &lt;= <span class="string">'F'</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (!(nkey &amp; <span class="number">1</span> &lt;&lt; (p - <span class="string">'A'</span>))) <span class="keyword">continue</span>;        <span class="comment">// important</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (p &gt;= <span class="string">'a'</span> &amp;&amp; p &lt;= <span class="string">'f'</span>) &#123;</span><br><span class="line">                        nkey |= (<span class="number">1</span> &lt;&lt; (p - <span class="string">'a'</span>));</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">int</span> temp = (dx &lt;&lt; <span class="number">16</span>) | (dy &lt;&lt; <span class="number">8</span>) | nkey;        <span class="comment">// remeber the bit</span></span><br><span class="line">                    q.push(temp);</span><br><span class="line">                    visited[dx][dy][nkey] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">step</span>++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// heights.insert(heights.begin(), 0);</span></span><br><span class="line">        heights.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">        <span class="keyword">int</span> area = <span class="number">0</span>;</span><br><span class="line">        st.push(<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; heights.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (st.top() != <span class="number">-1</span> &amp;&amp; heights[i] &lt; heights[st.top()]) &#123;</span><br><span class="line">                <span class="keyword">int</span> cur = st.top(); st.pop();</span><br><span class="line">                area = <span class="built_in">max</span>(area, heights[cur] * (i - st.top() - <span class="number">1</span>));   <span class="comment">// i- (st.top() + 1) 顶到头</span></span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; cur &lt;&lt; <span class="string">" "</span>&lt;&lt;st.top() &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            st.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> area;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
 
       
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Bit</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/19/LeetCode-864-Shortest-Path-to-Get-All-Keys/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>THX!<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-773-Sliding-Puzzle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/19/LeetCode-773-Sliding-Puzzle/">773. Sliding Puzzle</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/19/LeetCode-773-Sliding-Puzzle/" class="archive-article-date">
-  	<time datetime="2020-07-18T16:46:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="773-Sliding-Puzzle"><a href="#773-Sliding-Puzzle" class="headerlink" title="773. Sliding Puzzle"></a>773. Sliding Puzzle</h2><p>On a 2x3 board, there are 5 tiles represented by the integers 1 through 5, and an empty square represented by 0.</p>
-<p>A move consists of choosing 0 and a 4-directionally adjacent number and swapping it.</p>
-<p>The state of the board is solved if and only if the board is [[1,2,3],[4,5,0]].</p>
-<p>Given a puzzle board, return the least number of moves required so that the state of the board is solved. If it is impossible for the state of the board to be solved, return -1.</p>
-<p>题目大意：给你一个2×3的棋盘，放着0-5。每一步0可以和上下左右的一个数交换。问需要多少步可以构成123450的棋盘状态。</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Input: board = [[1,2,3],[4,0,5]]<br>Output: 1<br>Explanation: Swap the 0 and the 5 in one move.</p>
-</blockquote>
-<h2 id="Example2"><a href="#Example2" class="headerlink" title="Example2"></a>Example2</h2><blockquote>
-<p>Input: board = [[4,1,2],[5,0,3]]<br>Output: 5<br>Explanation: 5 is the smallest number of moves that solves the board.<br>An example path:<br>After move 0: [[4,1,2],[5,0,3]]<br>After move 1: [[4,1,2],[0,5,3]]<br>After move 2: [[0,1,2],[4,5,3]]<br>After move 3: [[1,0,2],[4,5,3]]<br>After move 4: [[1,2,0],[4,5,3]]<br>After move 5: [[1,2,3],[4,5,0]]</p>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>Standard BFS visited is important to cut the branches.</li>
-<li>2d - 1d int x = p % kCols; int y = p / kCols;</li>
-<li>size –;</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(6!)</li>
-<li>Space: O(6!)</li>
-</ul>
-<h2 id="Code-Method1"><a href="#Code-Method1" class="headerlink" title="Code: Method1"></a>Code: Method1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">slidingPuzzle</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; board)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">constexpr</span> <span class="keyword">int</span> kRows = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">constexpr</span> <span class="keyword">int</span> kCols = <span class="number">3</span>;</span><br><span class="line">        <span class="built_in">string</span> start;</span><br><span class="line">        <span class="built_in">string</span> goal = <span class="string">"123450"</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dir = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; board.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; board[<span class="number">0</span>].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                start += to_string(board[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="built_in">string</span>&gt; q;</span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt; visited&#123;start&#125;;</span><br><span class="line">        q.push(start);</span><br><span class="line">        <span class="keyword">int</span> <span class="built_in">step</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> <span class="built_in">size</span> = q.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">while</span> (<span class="built_in">size</span> --)&#123;                    <span class="comment">// each layer</span></span><br><span class="line">                <span class="built_in">string</span> cur = q.front();</span><br><span class="line">                q.pop();</span><br><span class="line">                <span class="keyword">if</span> (cur == goal) <span class="keyword">return</span> <span class="built_in">step</span>;</span><br><span class="line">                <span class="keyword">int</span> p = cur.<span class="built_in">find</span>(<span class="string">"0"</span>);</span><br><span class="line">                <span class="keyword">int</span> x = p % kCols;</span><br><span class="line">                <span class="keyword">int</span> y = p / kCols;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">                    <span class="keyword">int</span> dx = x + dir[i][<span class="number">0</span>];</span><br><span class="line">                    <span class="keyword">int</span> dy = y + dir[i][<span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">if</span> (dx &lt; <span class="number">0</span> || dx &gt;= kCols || dy &lt; <span class="number">0</span> || dy &gt;= kRows) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">int</span> pp = dy * kCols + dx;    <span class="comment">// 2d - 1d</span></span><br><span class="line">                    <span class="function"><span class="built_in">string</span> <span class="title">f</span><span class="params">(cur)</span></span>;</span><br><span class="line">                    swap(f[p], f[pp]);</span><br><span class="line">                    <span class="keyword">if</span> (visited.count(f) != <span class="number">0</span>) <span class="keyword">continue</span>;   <span class="comment">//important to cut the branches</span></span><br><span class="line">                    q.push(f);</span><br><span class="line">                    visited.insert(f);     <span class="comment">// important</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">step</span>++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-
       
     </div>
     <div class="article-info article-info-index">
@@ -513,128 +227,21 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/19/LeetCode-773-Sliding-Puzzle/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-787-Cheapest-Flights-Within-K-Stops" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/18/LeetCode-787-Cheapest-Flights-Within-K-Stops/">LeetCode 787 Cheapest Flights Within K Stops</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/18/LeetCode-787-Cheapest-Flights-Within-K-Stops/" class="archive-article-date">
-  	<time datetime="2020-07-18T14:47:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Cheapest-Flights-Within-K-Stops"><a href="#Cheapest-Flights-Within-K-Stops" class="headerlink" title="Cheapest Flights Within K Stops"></a>Cheapest Flights Within K Stops</h2><p>There are n cities connected by m flights. Each flight starts from city u and arrives at v with a price w.</p>
-<p>Now given all the cities and flights, together with starting city src and the destination dst, your task is to find the cheapest price from src to dst with up to k stops. If there is no such route, output -1.</p>
-<h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1"></a>Example 1</h2><blockquote>
-<p>Example 1:<br>Input:<br>n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]<br>src = 0, dst = 2, k = 1<br>Output: 200<br>Explanation:<br>The graph looks like this:<br><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/02/16/995.png" alt="leet"><br>The cheapest price from city 0 to city 2 with at most 1 stop costs 200,as marked red in the picture.</p>
-</blockquote>
-<h2 id="Constraints"><a href="#Constraints" class="headerlink" title="Constraints"></a>Constraints</h2><blockquote>
-<ul>
-<li>The number of nodes n will be in range [1, 100], with nodes labeled from 0 to n - 1.</li>
-<li>The size of flights will be in range [0, n * (n - 1) / 2].</li>
-<li>The format of each flight will be (src, dst, price).</li>
-<li>The price of each flight will be in the range [1, 10000].</li>
-<li>k is in the range of [0, n - 1].</li>
-<li>There will not be any duplicated flights or self cycles.</li>
-</ul>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><p><img src="https://zxi.mytechroad.com/blog/wp-content/uploads/2018/02/787-ep170.png" alt="solusion"></p>
-<blockquote>
-<ul>
-<li>DP<ol>
-<li>init: dp[0:k+2][src] = 0</li>
-<li>transition: dp[k][i] = min(dp[k-1][j] + price[j][i])</li>
-<li>ans: dp[K+1][dst]  </li>
-</ol>
-</li>
-<li>DFS</li>
-<li>BFS</li>
-</ul>
-</blockquote>
-<h2 id="Code-Method-1-DP"><a href="#Code-Method-1-DP" class="headerlink" title="Code Method 1: DP"></a>Code Method 1: DP</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findCheapestPrice</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; flights, <span class="keyword">int</span> src, <span class="keyword">int</span> dst, <span class="keyword">int</span> K)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">int</span> kInfCost = <span class="number">1e9</span>;                                       <span class="comment">// because we need to add costs so we cannot use INT_MAX;</span></span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">dp</span><span class="params">(K + <span class="number">2</span>, <span class="built_in">vector</span>(n, kInfCost))</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>][src] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= K + <span class="number">1</span>; k++) &#123;</span><br><span class="line">            dp[k][src] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p : flights)&#123;</span><br><span class="line">                dp[k][p[<span class="number">1</span>]] = <span class="built_in">min</span>(dp[k][p[<span class="number">1</span>]], dp[k - <span class="number">1</span>][p[<span class="number">0</span>]] + p[<span class="number">2</span>]); <span class="comment">// important minimun cost of with most K edges from src to dst.</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[K + <span class="number">1</span>][dst] == kInfCost ? <span class="number">-1</span> : dp[K+<span class="number">1</span>][dst];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// Time Complexity: O(k*E) = O(k*n^2)</span></span><br><span class="line"><span class="comment">// Space Complexity: O(k*n)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Code-Method-2-DFS"><a href="#Code-Method-2-DFS" class="headerlink" title="Code Method 2: DFS"></a>Code Method 2: DFS</h2><h2 id="Code-Method-3-BFS"><a href="#Code-Method-3-BFS" class="headerlink" title="Code Method 3: BFS"></a>Code Method 3: BFS</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Stack</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mono Stack</a>
+        		</li>
       		
 		</ul>
 	</div>
@@ -642,16 +249,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/18/LeetCode-787-Cheapest-Flights-Within-K-Stops/">Read More >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/23/LeetCode-84-Largest-Rectangle-in-Histogram/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/22/LeetCode-224-Basic-Calculator/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 224. Basic Calculator</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -671,215 +337,14 @@
 
 
 
-
-  
-    <article id="post-LeetCode-251-Flatten-2D-Vector" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/18/LeetCode-251-Flatten-2D-Vector/">LeetCode 251 Flatten 2D Vector</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/18/LeetCode-251-Flatten-2D-Vector/" class="archive-article-date">
-  	<time datetime="2020-07-18T12:36:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Flatten-2D-Vector"><a href="#Flatten-2D-Vector" class="headerlink" title="Flatten 2D Vector"></a>Flatten 2D Vector</h2><p>Design and implement an iterator to flatten a 2d vector. It should support the following operations: next and hasNext.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Vector2D iterator = new Vector2D([[1,2],[3],[4]]);</p>
-<p>iterator.next(); // return 1<br>iterator.next(); // return 2<br>iterator.next(); // return 3<br>iterator.hasNext(); // return true<br>iterator.hasNext(); // return true<br>iterator.next(); // return 4<br>iterator.hasNext(); // return false</p>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>Two pointers: inner vs outer.</li>
-<li>inner++ then update it with updating outer.</li>
-<li>make corner cases.</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(1)</li>
-<li>Space: O(1)</li>
-</ul>
-<h2 id="Code-Method1"><a href="#Code-Method1" class="headerlink" title="Code: Method1"></a>Code: Method1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vector2D</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Vector2D(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; _v) &#123;</span><br><span class="line">        inner = <span class="number">0</span>;</span><br><span class="line">        outer = <span class="number">0</span>;</span><br><span class="line">        v = &amp;_v;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(hasNext()) <span class="keyword">return</span> (*v)[outer][inner++];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (outer &lt; (*v).<span class="built_in">size</span>() &amp;&amp; inner == (*v)[outer].<span class="built_in">size</span>())&#123;</span><br><span class="line">            inner = <span class="number">0</span>;</span><br><span class="line">            outer++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> outer &lt; (*v).<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> inner;</span><br><span class="line">    <span class="keyword">int</span> outer;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;* v;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Code-Method2-Use-C-iterator"><a href="#Code-Method2-Use-C-iterator" class="headerlink" title="Code: Method2 Use C++ iterator"></a>Code: Method2 Use C++ iterator</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vector2D</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Vector2D(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; v) &#123;</span><br><span class="line">        s = v.<span class="built_in">begin</span>();</span><br><span class="line">        e = v.<span class="built_in">end</span>();</span><br><span class="line">        <span class="keyword">if</span> (s != e) &#123;</span><br><span class="line">            inner = s-&gt;<span class="built_in">begin</span>();         <span class="comment">// check</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hasNext()) <span class="keyword">return</span> *inner++;     <span class="comment">//hasNext()</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (s != e &amp;&amp; inner == s-&gt;<span class="built_in">end</span>())&#123;    <span class="comment">//find the next valid pos</span></span><br><span class="line">            s++;</span><br><span class="line">            <span class="keyword">if</span> (s != e) inner = s-&gt;<span class="built_in">begin</span>();  <span class="comment">// important check s != e</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s != e;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;::iterator s, e;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator inner;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your Vector2D object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * Vector2D* obj = new Vector2D(v);</span></span><br><span class="line"><span class="comment"> * int param_1 = obj-&gt;next();</span></span><br><span class="line"><span class="comment"> * bool param_2 = obj-&gt;hasNext();</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Design</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Two Pointer</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Iterator</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/18/LeetCode-251-Flatten-2D-Vector/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Leetcode-166" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/18/Leetcode-166/">Leetcode 166</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/18/Leetcode-166/" class="archive-article-date">
-  	<time datetime="2020-07-18T10:07:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Fraction to Recurring Decimal</p>
-<hr>
-<p>Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.</p>
-<p>If the fractional part is repeating, enclose the repeating part in parentheses.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Input: numerator = 1, denominator = 2<br>Output: “0.5”</p>
-</blockquote>
-<h2 id="Example2"><a href="#Example2" class="headerlink" title="Example2"></a>Example2</h2><blockquote>
-<p>Input: numerator = 2, denominator = 3<br>Output: “0.(6)”</p>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>Use the Long Division to find when the remainder repeats.</li>
-<li>Use hash map to store the remainder and the repeated pos.</li>
-<li>long int.</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(n)</li>
-<li>Space: O(n)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">fractionToDecimal</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> den)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (den == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">        <span class="built_in">string</span> ans = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span> (num &gt; <span class="number">0</span> ^ den &gt; <span class="number">0</span>) ans += <span class="string">"-"</span>;   <span class="comment">// xor</span></span><br><span class="line">        <span class="keyword">long</span> n = <span class="built_in">labs</span>(num), d = <span class="built_in">labs</span>(den);</span><br><span class="line">        <span class="keyword">auto</span> r = n % d;</span><br><span class="line">        ans += to_string(n/d);</span><br><span class="line">        <span class="keyword">if</span> (!r) <span class="keyword">return</span> ans;</span><br><span class="line">        ans += <span class="string">"."</span>;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">long</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">        <span class="keyword">while</span> (r) &#123;</span><br><span class="line">            <span class="keyword">if</span> (m.<span class="built_in">find</span>(r) != m.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                ans.insert(m[r], <span class="string">"("</span>);  <span class="comment">// string,insert</span></span><br><span class="line">                ans += <span class="string">")"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            m[r] = ans.<span class="built_in">size</span>();</span><br><span class="line">            r *= <span class="number">10</span>;    <span class="comment">// important</span></span><br><span class="line">            ans += to_string(r/d);</span><br><span class="line">            r %= d;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HashTable</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/18/Leetcode-166/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -902,8 +367,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
