@@ -148,6 +148,108 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/">LeetCode 1249. Minimum Remove to Make Valid Parentheses</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/" class="archive-article-date">
+  	<time datetime="2020-07-22T15:35:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses"><a href="#LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses" class="headerlink" title="LeetCode 1249. Minimum Remove to Make Valid Parentheses"></a>LeetCode 1249. Minimum Remove to Make Valid Parentheses</h2><p>Given a string s of ‘(‘ , ‘)’ and lowercase English characters. </p>
+<p>Your task is to remove the minimum number of parentheses ( ‘(‘ or ‘)’, in any positions ) so that the resulting parentheses string is valid and return any valid string.</p>
+<p>Formally, a parentheses string is valid if and only if:</p>
+<p>It is the empty string, contains only lowercase characters, or<br>It can be written as AB (A concatenated with B), where A and B are valid strings, or<br>It can be written as (A), where A is a valid string.</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
+<p>Input: s = “lee(t(c)o)de)”<br>Output: “lee(t(c)o)de”<br>Explanation: “lee(t(co)de)” , “lee(t(c)ode)” would also be accepted.</p>
+</blockquote>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><ul>
+<li>1 &lt;= s.length &lt;= 10^5</li>
+<li>s[i] is one of  ‘(‘ , ‘)’ and lowercase English letters.</li>
+</ul>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>Use stack to store the not fitting char’s index and use ‘*’ to placeholder</li>
+<li>Use string.erase(begin, newend)</li>
+<li>NewEnd is remove(begin, end, ‘c’)</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(n)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">minRemoveToMakeValid</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;pair&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt;&gt; charStack;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i] == <span class="string">'('</span>) charStack.emplace(s[i], i);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (s[i] == <span class="string">')'</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!charStack.empty() &amp;&amp; charStack.top().first == <span class="string">'('</span>) charStack.pop();</span><br><span class="line">                <span class="keyword">else</span> charStack.emplace(s[i], i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="built_in">string</span> <span class="title">ans</span><span class="params">(s)</span></span>;</span><br><span class="line">        <span class="keyword">while</span> (!charStack.empty()) &#123;</span><br><span class="line">            ans[charStack.top().second] = <span class="string">'!'</span>;</span><br><span class="line">            charStack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        ans.erase(<span class="built_in">remove</span>(ans.<span class="built_in">begin</span>(), ans.<span class="built_in">end</span>(), <span class="string">'!'</span>), ans.<span class="built_in">end</span>());  <span class="comment">//important</span></span><br><span class="line">        <span class="comment">// 把下一个不是val向前覆盖，最后要erase(newEnd,end());</span></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Method 2 Placeholder</span></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">minRemoveToMakeValid</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">'('</span>) st.push(i);</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">')'</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!st.empty()) st.pop();</span><br><span class="line">            <span class="keyword">else</span> s[i] = <span class="string">'*'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!st.empty()) &#123;</span><br><span class="line">        s[st.top()] = <span class="string">'*'</span>;</span><br><span class="line">        st.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        s.erase(<span class="built_in">remove</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>(), <span class="string">'*'</span>), s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Stack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-707-Design-Linked-List" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1014,110 +1116,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/07/20/LeetCode-2-Add-Two-Numbers/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-269-Alien-Dictionary" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/19/LeetCode-269-Alien-Dictionary/">LeetCode 269. Alien Dictionary</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/19/LeetCode-269-Alien-Dictionary/" class="archive-article-date">
-  	<time datetime="2020-07-19T15:51:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="269-Alien-Dictionary"><a href="#269-Alien-Dictionary" class="headerlink" title="269. Alien Dictionary"></a>269. Alien Dictionary</h2><p>There is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of non-empty words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.</p>
-<p>大意：给例子找规则。</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Input:<br>[<br>  “wrt”,<br>  “wrf”,<br>  “er”,<br>  “ett”,<br>  “rftt”<br>]<br>Output: “wertf”</p>
-</blockquote>
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><p>You may assume all letters are in lowercase.<br>If the order is invalid, return an empty string.<br>There may be multiple valid order of letters, return any one of them is fine.</p>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>make graph and indegrees.</li>
-<li>BFS to find the ans only indegree[i] == 0.</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(V+E)</li>
-<li>Space: O(V+E)</li>
-</ul>
-<h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">alienOrder</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">string</span> ans;</span><br><span class="line">        isTopo = <span class="literal">true</span>;</span><br><span class="line">        make_graph(words);</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">char</span>&gt; q;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> ele : indegree) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ele.second == <span class="number">0</span>) &#123;</span><br><span class="line">                q.push(ele.first);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            <span class="keyword">char</span> c = q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            ans.push_back(c);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> neighs : graph[c]) &#123;</span><br><span class="line">                indegree[neighs]--;</span><br><span class="line">                <span class="keyword">if</span> (indegree[neighs] == <span class="number">0</span>) q.push(neighs);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (ans.length() == indegree.<span class="built_in">size</span>()) &amp;&amp; isTopo? ans : <span class="string">""</span>;  <span class="comment">// judge cycle exist</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="built_in">unordered_set</span>&lt;<span class="keyword">char</span>&gt;&gt; graph;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; indegree;</span><br><span class="line">    <span class="keyword">bool</span> isTopo;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">make_graph</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> c : words[i]) &#123;</span><br><span class="line">                indegree[c] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.<span class="built_in">size</span>() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="built_in">string</span> cur = words[i];</span><br><span class="line">            <span class="built_in">string</span> next = words[i + <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> len = <span class="built_in">min</span>(cur.length(), next.length());</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (cur[j] != next[j]) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (graph[cur[j]].count(next[j]) == <span class="number">0</span>) &#123;</span><br><span class="line">                        graph[cur[j]].emplace(next[j]);</span><br><span class="line">                        indegree[next[j]]++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>; <span class="comment">//ignore the useless digits</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (j == len - <span class="number">1</span> &amp;&amp; cur.<span class="built_in">size</span>() &gt; next.<span class="built_in">size</span>()) isTopo = <span class="literal">false</span>; <span class="comment">// corner case : abc ab</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Topological Sort</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Graph</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/19/LeetCode-269-Alien-Dictionary/">Read More >></a>
         </p>
       
 
