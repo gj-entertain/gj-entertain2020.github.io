@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Jamie&#39;s blog</title>
+  <title>LeetCode 814. Binary Tree Pruning | Jamie&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jamie&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+  <meta name="description" content="DescrptionWe are given the head node root of a binary tree, where additionally every node’s value is either a 0 or a 1. Return the same tree where every subtree (of the given tree) not containing a 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 814. Binary Tree Pruning">
+<meta property="og:url" content="http://yoursite.com/2020/07/26/LeetCode-814-Binary-Tree-Pruning/index.html">
 <meta property="og:site_name" content="Jamie&#39;s blog">
+<meta property="og:description" content="DescrptionWe are given the head node root of a binary tree, where additionally every node’s value is either a 0 or a 1. Return the same tree where every subtree (of the given tree) not containing a 1">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/04/06/1028_2.png">
+<meta property="article:published_time" content="2020-07-26T15:46:57.000Z">
+<meta property="article:modified_time" content="2020-07-26T15:49:42.426Z">
 <meta property="article:author" content="Jamie Gao">
+<meta property="article:tag" content="Medium">
+<meta property="article:tag" content="Tree">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/04/06/1028_2.png">
   
     <link rel="alternative" href="/atom.xml" title="Jamie&#39;s blog" type="application/atom+xml">
   
@@ -146,163 +154,66 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-LeetCode-787-Cheapest-Flights-Within-K-Stops" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-LeetCode-814-Binary-Tree-Pruning" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/18/LeetCode-787-Cheapest-Flights-Within-K-Stops/">LeetCode 787 Cheapest Flights Within K Stops</a>
+    <h1 class="article-title" itemprop="name">
+      LeetCode 814. Binary Tree Pruning
     </h1>
   
 
         
-        <a href="/2020/07/18/LeetCode-787-Cheapest-Flights-Within-K-Stops/" class="archive-article-date">
-  	<time datetime="2020-07-18T14:47:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
+        <a href="/2020/07/26/LeetCode-814-Binary-Tree-Pruning/" class="archive-article-date">
+  	<time datetime="2020-07-26T15:46:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Cheapest-Flights-Within-K-Stops"><a href="#Cheapest-Flights-Within-K-Stops" class="headerlink" title="Cheapest Flights Within K Stops"></a>Cheapest Flights Within K Stops</h2><p>There are n cities connected by m flights. Each flight starts from city u and arrives at v with a price w.</p>
-<p>Now given all the cities and flights, together with starting city src and the destination dst, your task is to find the cheapest price from src to dst with up to k stops. If there is no such route, output -1.</p>
-<h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1"></a>Example 1</h2><blockquote>
-<p>Example 1:<br>Input:<br>n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]<br>src = 0, dst = 2, k = 1<br>Output: 200<br>Explanation:<br>The graph looks like this:<br><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/02/16/995.png" alt="leet"><br>The cheapest price from city 0 to city 2 with at most 1 stop costs 200,as marked red in the picture.</p>
-</blockquote>
-<h2 id="Constraints"><a href="#Constraints" class="headerlink" title="Constraints"></a>Constraints</h2><blockquote>
-<ul>
-<li>The number of nodes n will be in range [1, 100], with nodes labeled from 0 to n - 1.</li>
-<li>The size of flights will be in range [0, n * (n - 1) / 2].</li>
-<li>The format of each flight will be (src, dst, price).</li>
-<li>The price of each flight will be in the range [1, 10000].</li>
-<li>k is in the range of [0, n - 1].</li>
-<li>There will not be any duplicated flights or self cycles.</li>
-</ul>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><p><img src="https://zxi.mytechroad.com/blog/wp-content/uploads/2018/02/787-ep170.png" alt="solusion"></p>
-<blockquote>
-<ul>
-<li>DP<ol>
-<li>init: dp[0:k+2][src] = 0</li>
-<li>transition: dp[k][i] = min(dp[k-1][j] + price[j][i])</li>
-<li>ans: dp[K+1][dst]  </li>
-</ol>
-</li>
-<li>DFS</li>
-<li>BFS</li>
-</ul>
-</blockquote>
-<h2 id="Code-Method-1-DP"><a href="#Code-Method-1-DP" class="headerlink" title="Code Method 1: DP"></a>Code Method 1: DP</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findCheapestPrice</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; flights, <span class="keyword">int</span> src, <span class="keyword">int</span> dst, <span class="keyword">int</span> K)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">int</span> kInfCost = <span class="number">1e9</span>;                                       <span class="comment">// because we need to add costs so we cannot use INT_MAX;</span></span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">dp</span><span class="params">(K + <span class="number">2</span>, <span class="built_in">vector</span>(n, kInfCost))</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>][src] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= K + <span class="number">1</span>; k++) &#123;</span><br><span class="line">            dp[k][src] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; p : flights)&#123;</span><br><span class="line">                dp[k][p[<span class="number">1</span>]] = <span class="built_in">min</span>(dp[k][p[<span class="number">1</span>]], dp[k - <span class="number">1</span>][p[<span class="number">0</span>]] + p[<span class="number">2</span>]); <span class="comment">// important minimun cost of with most K edges from src to dst.</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[K + <span class="number">1</span>][dst] == kInfCost ? <span class="number">-1</span> : dp[K+<span class="number">1</span>][dst];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// Time Complexity: O(k*E) = O(k*n^2)</span></span><br><span class="line"><span class="comment">// Space Complexity: O(k*n)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Code-Method-2-DFS"><a href="#Code-Method-2-DFS" class="headerlink" title="Code Method 2: DFS"></a>Code Method 2: DFS</h2><h2 id="Code-Method-3-BFS"><a href="#Code-Method-3-BFS" class="headerlink" title="Code Method 3: BFS"></a>Code Method 3: BFS</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/18/LeetCode-787-Cheapest-Flights-Within-K-Stops/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-251-Flatten-2D-Vector" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/18/LeetCode-251-Flatten-2D-Vector/">LeetCode 251 Flatten 2D Vector</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/18/LeetCode-251-Flatten-2D-Vector/" class="archive-article-date">
-  	<time datetime="2020-07-18T12:36:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Flatten-2D-Vector"><a href="#Flatten-2D-Vector" class="headerlink" title="Flatten 2D Vector"></a>Flatten 2D Vector</h2><p>Design and implement an iterator to flatten a 2d vector. It should support the following operations: next and hasNext.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Vector2D iterator = new Vector2D([[1,2],[3],[4]]);</p>
-<p>iterator.next(); // return 1<br>iterator.next(); // return 2<br>iterator.next(); // return 3<br>iterator.hasNext(); // return true<br>iterator.hasNext(); // return true<br>iterator.next(); // return 4<br>iterator.hasNext(); // return false</p>
-</blockquote>
+        <h2 id="Descrption"><a href="#Descrption" class="headerlink" title="Descrption"></a>Descrption</h2><p>We are given the head node root of a binary tree, where additionally every node’s value is either a 0 or a 1.</p>
+<p>Return the same tree where every subtree (of the given tree) not containing a 1 has been removed.</p>
+<p>(Recall that the subtree of a node X is X, plus every node that is a descendant of X.)</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><p><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/04/06/1028_2.png" alt="d"></p>
+<p>Example 1:<br>Input: [1,null,0,0,1]<br>Output: [1,null,0,null,1]</p>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><p>The binary tree will have at most 100 nodes.<br>The value of each node will only be 0 or 1.</p>
 <h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>Two pointers: inner vs outer.</li>
-<li>inner++ then update it with updating outer.</li>
-<li>make corner cases.</li>
+<li>用recursion表示关系</li>
 </ol>
 <h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(1)</li>
-<li>Space: O(1)</li>
+<li>Time Complexity: O(n) (n is num of all nodes)</li>
+<li>Space Complexity: O(n) (worst case is a linked list)</li>
 </ul>
-<h2 id="Code-Method1"><a href="#Code-Method1" class="headerlink" title="Code: Method1"></a>Code: Method1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vector2D</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Vector2D(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; _v) &#123;</span><br><span class="line">        inner = <span class="number">0</span>;</span><br><span class="line">        outer = <span class="number">0</span>;</span><br><span class="line">        v = &amp;_v;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(hasNext()) <span class="keyword">return</span> (*v)[outer][inner++];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (outer &lt; (*v).<span class="built_in">size</span>() &amp;&amp; inner == (*v)[outer].<span class="built_in">size</span>())&#123;</span><br><span class="line">            inner = <span class="number">0</span>;</span><br><span class="line">            outer++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> outer &lt; (*v).<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> inner;</span><br><span class="line">    <span class="keyword">int</span> outer;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;* v;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">pruneTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> (containOne(root)) ? root : <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">containOne</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">bool</span> l = containOne(root-&gt;left);</span><br><span class="line">        <span class="keyword">bool</span> r = containOne(root-&gt;right);</span><br><span class="line">        <span class="keyword">if</span> (!l) root-&gt;left = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (!r) root-&gt;right = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> root-&gt;val == <span class="number">1</span> || l || r;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Code-Method2-Use-C-iterator"><a href="#Code-Method2-Use-C-iterator" class="headerlink" title="Code: Method2 Use C++ iterator"></a>Code: Method2 Use C++ iterator</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vector2D</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Vector2D(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; v) &#123;</span><br><span class="line">        s = v.<span class="built_in">begin</span>();</span><br><span class="line">        e = v.<span class="built_in">end</span>();</span><br><span class="line">        <span class="keyword">if</span> (s != e) &#123;</span><br><span class="line">            inner = s-&gt;<span class="built_in">begin</span>();         <span class="comment">// check</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hasNext()) <span class="keyword">return</span> *inner++;     <span class="comment">//hasNext()</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (s != e &amp;&amp; inner == s-&gt;<span class="built_in">end</span>())&#123;    <span class="comment">//find the next valid pos</span></span><br><span class="line">            s++;</span><br><span class="line">            <span class="keyword">if</span> (s != e) inner = s-&gt;<span class="built_in">begin</span>();  <span class="comment">// important check s != e</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s != e;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;::iterator s, e;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator inner;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your Vector2D object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * Vector2D* obj = new Vector2D(v);</span></span><br><span class="line"><span class="comment"> * int param_1 = obj-&gt;next();</span></span><br><span class="line"><span class="comment"> * bool param_2 = obj-&gt;hasNext();</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>THX!<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -317,15 +228,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Design</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Two Pointer</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Iterator</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tree</a>
         		</li>
       		
 		</ul>
@@ -334,16 +237,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/18/LeetCode-251-Flatten-2D-Vector/">Read More >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/26/LeetCode-814-Binary-Tree-Pruning/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/24/LeetCode-297-Serialize-and-Deserialize-Binary-Tree/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 297. Serialize and Deserialize Binary Tree</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -363,113 +325,14 @@
 
 
 
-
-  
-    <article id="post-Leetcode-166" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/18/Leetcode-166/">Leetcode 166</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/18/Leetcode-166/" class="archive-article-date">
-  	<time datetime="2020-07-18T10:07:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Fraction to Recurring Decimal</p>
-<hr>
-<p>Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.</p>
-<p>If the fractional part is repeating, enclose the repeating part in parentheses.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Input: numerator = 1, denominator = 2<br>Output: “0.5”</p>
-</blockquote>
-<h2 id="Example2"><a href="#Example2" class="headerlink" title="Example2"></a>Example2</h2><blockquote>
-<p>Input: numerator = 2, denominator = 3<br>Output: “0.(6)”</p>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>Use the Long Division to find when the remainder repeats.</li>
-<li>Use hash map to store the remainder and the repeated pos.</li>
-<li>long int.</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(n)</li>
-<li>Space: O(n)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">fractionToDecimal</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> den)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (den == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">        <span class="built_in">string</span> ans = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span> (num &gt; <span class="number">0</span> ^ den &gt; <span class="number">0</span>) ans += <span class="string">"-"</span>;   <span class="comment">// xor</span></span><br><span class="line">        <span class="keyword">long</span> n = <span class="built_in">labs</span>(num), d = <span class="built_in">labs</span>(den);</span><br><span class="line">        <span class="keyword">auto</span> r = n % d;</span><br><span class="line">        ans += to_string(n/d);</span><br><span class="line">        <span class="keyword">if</span> (!r) <span class="keyword">return</span> ans;</span><br><span class="line">        ans += <span class="string">"."</span>;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">long</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">        <span class="keyword">while</span> (r) &#123;</span><br><span class="line">            <span class="keyword">if</span> (m.<span class="built_in">find</span>(r) != m.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                ans.insert(m[r], <span class="string">"("</span>);  <span class="comment">// string,insert</span></span><br><span class="line">                ans += <span class="string">")"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            m[r] = ans.<span class="built_in">size</span>();</span><br><span class="line">            r *= <span class="number">10</span>;    <span class="comment">// important</span></span><br><span class="line">            ans += to_string(r/d);</span><br><span class="line">            r %= d;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HashTable</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Math</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/18/Leetcode-166/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -492,8 +355,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
