@@ -16,7 +16,7 @@
 <meta property="og:description" content="DescrptionThe thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. Af">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-27T19:34:11.000Z">
-<meta property="article:modified_time" content="2020-07-27T19:39:18.488Z">
+<meta property="article:modified_time" content="2020-07-27T20:25:32.004Z">
 <meta property="article:author" content="Jamie Gao">
 <meta property="article:tag" content="Medium">
 <meta property="article:tag" content="DFS">
@@ -184,6 +184,8 @@
 <h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
 <li>Use reference para in recursion to store 3 layer’s relation</li>
 <li>Key points is result is stolen root + max(all grandsons) or max(all sons)(maybe not stolen)</li>
+<li>当前节点选择不偷：当前节点能偷到的最大钱数 = 左孩子能偷到的钱 + 右孩子能偷到的钱</li>
+<li>当前节点选择偷：当前节点能偷到的最大钱数 = 左孩子选择自己不偷时能得到的钱 + 右孩子选择不偷时能得到的钱 + 当前节点的钱数</li>
 </ol>
 <h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
 <li>Time Complexity: O(n) (n is num of all nodes)</li>
@@ -309,6 +311,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/07/28/LeetCode-979-Distribute-Coins-in-Binary-Tree/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          LeetCode 979. Distribute Coins in Binary Tree
+        
+      </div>
+    </a>
   
   
     <a href="/2020/07/28/LeetCode-968-Binary-Tree-Cameras/" id="article-nav-older" class="article-nav-link-wrap">
