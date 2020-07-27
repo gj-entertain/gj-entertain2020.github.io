@@ -148,6 +148,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-739-Daily-Temperatures" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/23/LeetCode-739-Daily-Temperatures/">LeetCode 739. Daily Temperatures</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/23/LeetCode-739-Daily-Temperatures/" class="archive-article-date">
+  	<time datetime="2020-07-23T11:57:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Descrption"><a href="#Descrption" class="headerlink" title="Descrption"></a>Descrption</h2><p>Given a list of daily temperatures T, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put 0 instead.</p>
+<p>For example, given the list of temperatures T = [73, 74, 75, 71, 69, 72, 76, 73], your output should be [1, 1, 4, 2, 1, 1, 0, 0].</p>
+<p>Note: The length of temperatures will be in the range [1, 30000]. Each temperature will be an integer in the range [30, 100].</p>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>Bruce force is o(n^2) but we can use space to trade time</li>
+<li>Maintain a mono stack stored the index of each temperature that is decreasing. (Push when decreasing is increasing pop until decreasing)</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time Complexity: O(n) (n is num of all char)</li>
+<li>Space Complexity: O(n)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dailyTemperatures</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; T)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">res</span><span class="params">(T.<span class="built_in">size</span>())</span></span>;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; mono_st;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; T.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!mono_st.empty() &amp;&amp; T[mono_st.top()] &lt; T[i]) &#123;</span><br><span class="line">                res[mono_st.top()] = i - mono_st.top();</span><br><span class="line">                mono_st.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            mono_st.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Stack</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mono Stack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/23/LeetCode-739-Daily-Temperatures/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-636-Exclusive-Time-of-Functions" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -967,108 +1064,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/07/22/LeetCode-224-Basic-Calculator/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/">LeetCode 1249. Minimum Remove to Make Valid Parentheses</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/" class="archive-article-date">
-  	<time datetime="2020-07-22T15:35:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses"><a href="#LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses" class="headerlink" title="LeetCode 1249. Minimum Remove to Make Valid Parentheses"></a>LeetCode 1249. Minimum Remove to Make Valid Parentheses</h2><p>Given a string s of ‘(‘ , ‘)’ and lowercase English characters. </p>
-<p>Your task is to remove the minimum number of parentheses ( ‘(‘ or ‘)’, in any positions ) so that the resulting parentheses string is valid and return any valid string.</p>
-<p>Formally, a parentheses string is valid if and only if:</p>
-<p>It is the empty string, contains only lowercase characters, or<br>It can be written as AB (A concatenated with B), where A and B are valid strings, or<br>It can be written as (A), where A is a valid string.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
-<p>Input: s = “lee(t(c)o)de)”<br>Output: “lee(t(c)o)de”<br>Explanation: “lee(t(co)de)” , “lee(t(c)ode)” would also be accepted.</p>
-</blockquote>
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><ul>
-<li>1 &lt;= s.length &lt;= 10^5</li>
-<li>s[i] is one of  ‘(‘ , ‘)’ and lowercase English letters.</li>
-</ul>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>Use stack to store the not fitting char’s index and use ‘*’ to placeholder</li>
-<li>Use string.erase(begin, newend)</li>
-<li>NewEnd is remove(begin, end, ‘c’)</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time Complexity: O(n)</li>
-<li>Space Complexity: O(n)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">minRemoveToMakeValid</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;pair&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt;&gt; charStack;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i] == <span class="string">'('</span>) charStack.emplace(s[i], i);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (s[i] == <span class="string">')'</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!charStack.empty() &amp;&amp; charStack.top().first == <span class="string">'('</span>) charStack.pop();</span><br><span class="line">                <span class="keyword">else</span> charStack.emplace(s[i], i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="built_in">string</span> <span class="title">ans</span><span class="params">(s)</span></span>;</span><br><span class="line">        <span class="keyword">while</span> (!charStack.empty()) &#123;</span><br><span class="line">            ans[charStack.top().second] = <span class="string">'!'</span>;</span><br><span class="line">            charStack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        ans.erase(<span class="built_in">remove</span>(ans.<span class="built_in">begin</span>(), ans.<span class="built_in">end</span>(), <span class="string">'!'</span>), ans.<span class="built_in">end</span>());  <span class="comment">//important</span></span><br><span class="line">        <span class="comment">// 把下一个不是val向前覆盖，最后要erase(newEnd,end());</span></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Method 2 Placeholder</span></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">minRemoveToMakeValid</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">'('</span>) st.push(i);</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">')'</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!st.empty()) st.pop();</span><br><span class="line">            <span class="keyword">else</span> s[i] = <span class="string">'*'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!st.empty()) &#123;</span><br><span class="line">        s[st.top()] = <span class="string">'*'</span>;</span><br><span class="line">        st.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        s.erase(<span class="built_in">remove</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>(), <span class="string">'*'</span>), s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Stack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/22/LeetCode-1249-Minimum-Remove-to-Make-Valid-Parentheses/">Read More >></a>
         </p>
       
 
