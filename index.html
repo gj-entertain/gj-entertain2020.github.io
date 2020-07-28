@@ -148,6 +148,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-47-Permutations-II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/28/LeetCode-47-Permutations-II/">LeetCode 47. Permutations II</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/28/LeetCode-47-Permutations-II/" class="archive-article-date">
+  	<time datetime="2020-07-28T11:57:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a collection of numbers that might contain duplicates, return all possible unique permutations.</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><p>Input: [1,1,2]<br>Output:<br>[<br>  [1,1,2],<br>  [1,2,1],<br>  [2,1,1]<br>]</p>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><p><img src="https://pic.leetcode-cn.com/0f1c183ceb7b634f8a527028afd4893e26dfe3796afce35cbb177b125939179b-LeetCode%20%E7%AC%AC%2047%20%E9%A2%98%EF%BC%9A%E2%80%9C%E5%85%A8%E6%8E%92%E5%88%97%20II%E2%80%9D%E9%A2%98%E8%A7%A3%E9%85%8D%E5%9B%BE.png" alt="lc"></p>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time: O(n!)</li>
+<li>Space: O(n! or n + k)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">permuteUnique</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; cur;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">used</span><span class="params">(nums.<span class="built_in">size</span>(), <span class="number">0</span>)</span></span>;</span><br><span class="line">        sort(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        dfs(nums, <span class="number">0</span>, used, cur, ans);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> d, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; used, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; cur, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; ans)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == d) &#123;</span><br><span class="line">            ans.push_back(cur);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (used[i]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] &amp;&amp; !used[i - <span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">//when last one is recovered than can ignore if is using then cannot ignore</span></span><br><span class="line">            used[i] = <span class="number">1</span>;</span><br><span class="line">            cur.push_back(nums[i]);</span><br><span class="line">            dfs(nums, d + <span class="number">1</span>, used, cur, ans);</span><br><span class="line">            cur.pop_back();</span><br><span class="line">            used[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Recursion</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Permutation</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/28/LeetCode-47-Permutations-II/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-90-Subsets-II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1056,99 +1149,6 @@
 
 
   
-    <article id="post-LeetCode-814-Binary-Tree-Pruning" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/26/LeetCode-814-Binary-Tree-Pruning/">LeetCode 814. Binary Tree Pruning</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/26/LeetCode-814-Binary-Tree-Pruning/" class="archive-article-date">
-  	<time datetime="2020-07-26T15:46:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Descrption"><a href="#Descrption" class="headerlink" title="Descrption"></a>Descrption</h2><p>We are given the head node root of a binary tree, where additionally every node’s value is either a 0 or a 1.</p>
-<p>Return the same tree where every subtree (of the given tree) not containing a 1 has been removed.</p>
-<p>(Recall that the subtree of a node X is X, plus every node that is a descendant of X.)</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><p><img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/04/06/1028_2.png" alt="d"></p>
-<p>Example 1:<br>Input: [1,null,0,0,1]<br>Output: [1,null,0,null,1]</p>
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><p>The binary tree will have at most 100 nodes.<br>The value of each node will only be 0 or 1.</p>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>用recursion表示关系</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time Complexity: O(n) (n is num of all nodes)</li>
-<li>Space Complexity: O(n) (worst case is a linked list)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">pruneTree</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> (containOne(root)) ? root : <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">containOne</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">bool</span> l = containOne(root-&gt;left);</span><br><span class="line">        <span class="keyword">bool</span> r = containOne(root-&gt;right);</span><br><span class="line">        <span class="keyword">if</span> (!l) root-&gt;left = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (!r) root-&gt;right = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> root-&gt;val == <span class="number">1</span> || l || r;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tree</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/26/LeetCode-814-Binary-Tree-Pruning/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1387,6 +1387,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Solved</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Permutation</a>
               </li>
             
             <div class="clearfix"></div>
