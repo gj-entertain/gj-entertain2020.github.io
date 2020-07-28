@@ -148,6 +148,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-22-Generate-Parentheses" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/28/LeetCode-22-Generate-Parentheses/">LeetCode 22. Generate Parentheses</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/28/LeetCode-22-Generate-Parentheses/" class="archive-article-date">
+  	<time datetime="2020-07-28T15:25:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p>
+<p>For example, given n = 3, a solution set is:</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><p>[<br>  “((()))”,<br>  “(()())”,<br>  “(())()”,<br>  “()(())”,<br>  “()()()”<br>]</p>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><p>Time complexity: O(2^n)</p>
+<p>Space complexity: O(k + n) k is the cur n is the recursion height</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">generateParenthesis</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ans;</span><br><span class="line">        <span class="built_in">string</span> cur;</span><br><span class="line">        dfs(n, n, cur, ans);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="built_in">string</span> cur, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; ans)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l == <span class="number">0</span> &amp;&amp; r == <span class="number">0</span>) &#123;</span><br><span class="line">            ans.push_back(cur);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (l &gt; <span class="number">0</span>) dfs(l - <span class="number">1</span>, r, cur + <span class="string">"("</span>, ans);</span><br><span class="line">        <span class="keyword">if</span> (r &gt; <span class="number">0</span> &amp;&amp; l &lt; r) dfs(l, r - <span class="number">1</span>, cur + <span class="string">")"</span>, ans);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Combination</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/28/LeetCode-22-Generate-Parentheses/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-996-Number-of-Squareful-Arrays" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1014,110 +1100,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/07/28/LeetCode-968-Binary-Tree-Cameras/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-687-Longest-Univalue-Path" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/28/LeetCode-687-Longest-Univalue-Path/">LeetCode 687. Longest Univalue Path</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/28/LeetCode-687-Longest-Univalue-Path/" class="archive-article-date">
-  	<time datetime="2020-07-27T16:16:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Descrption"><a href="#Descrption" class="headerlink" title="Descrption"></a>Descrption</h2><p>Given a binary tree, find the length of the longest path where each node in the path has the same value. This path may or may not pass through the root.</p>
-<p>Note: The length of path between two nodes is represented by the number of edges between them.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><pre><code>    5
-   / \
-  4   5
- / \   \
-1   1   5</code></pre><p>2</p>
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><p>The given binary tree has not more than 10000 nodes. The height of the tree is not more than 1000.</p>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><p><img src="https://zxi.mytechroad.com/blog/wp-content/uploads/2017/10/687-ep78-1.png" alt="as"></p>
-<ol>
-<li>maxUni return the maxlength that cross the root but only one side.</li>
-<li>When dfs update the max length</li>
-<li>2side dfs but return one value</li>
-</ol>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time Complexity: O(n) (n is num of all nodes)</li>
-<li>Space Complexity: O(n) (worst case is a linked list)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestUnivaluePath</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        _ans = <span class="number">0</span>;</span><br><span class="line">        maxUni(root);</span><br><span class="line">        <span class="keyword">return</span> _ans;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>: </span><br><span class="line">    <span class="keyword">int</span> _ans;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxUni</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> l1 = maxUni(root-&gt;left);</span><br><span class="line">        <span class="keyword">int</span> r1 = maxUni(root-&gt;right);</span><br><span class="line">        <span class="keyword">int</span> l = (root-&gt;left &amp;&amp; (root-&gt;val == root-&gt;left-&gt;val)) ? <span class="number">1</span> + l1 : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> r = (root-&gt;right &amp;&amp; (root-&gt;val == root-&gt;right-&gt;val)) ? <span class="number">1</span> + r1 : <span class="number">0</span>;</span><br><span class="line">        _ans = <span class="built_in">max</span>(_ans, l + r);</span><br><span class="line">        <span class="keyword">int</span> num = <span class="built_in">max</span>(l, r);</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Tree</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Recursion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/28/LeetCode-687-Longest-Univalue-Path/">Read More >></a>
         </p>
       
 
