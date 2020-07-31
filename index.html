@@ -148,6 +148,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-752-Open-the-Lock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/31/LeetCode-752-Open-the-Lock/">LeetCode 752. Open the Lock</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/31/LeetCode-752-Open-the-Lock/" class="archive-article-date">
+  	<time datetime="2020-07-31T13:37:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You have a lock in front of you with 4 circular wheels. Each wheel has 10 slots: ‘0’, ‘1’, ‘2’, ‘3’, ‘4’, ‘5’, ‘6’, ‘7’, ‘8’, ‘9’. The wheels can rotate freely and wrap around: for example we can turn ‘9’ to be ‘0’, or ‘0’ to be ‘9’. Each move consists of turning one wheel one slot.</p>
+<p>The lock initially starts at ‘0000’, a string representing the state of the 4 wheels.</p>
+<p>You are given a list of deadends dead ends, meaning if the lock displays any of these codes, the wheels of the lock will stop turning and you will be unable to open it.</p>
+<p>Given a target representing the value of the wheels that will unlock the lock, return the minimum total number of turns required to open the lock, or -1 if it is impossible.</p>
+<p>题目大意：</p>
+<p>给你一个4位密码锁，0可以转到1和9，1可以转到0和2，。。。，9可以转到0和8。</p>
+<p>另外给你一些死锁的密码，比如1234，一但转到任何一个死锁的密码，锁就无法再转动了。</p>
+<p>给你一个目标密码，问你最少要转多少次才能从0000转到目标密码。</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Input: deadends = [“0201”,”0101”,”0102”,”1212”,”2002”], target = “0202”<br>Output: 6<br>Explanation:<br>A sequence of valid moves would be “0000” -&gt; “1000” -&gt; “1100” -&gt; “1200” -&gt; “1201” -&gt; “1202” -&gt; “0202”.<br>Note that a sequence like “0000” -&gt; “0001” -&gt; “0002” -&gt; “0102” -&gt; “0202” would be invalid,<br>because the wheels of the lock become stuck after the display becomes the dead end “0102”.</p>
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>The length of deadends will be in the range [1, 500].<br>target will not be in the list deadends.<br>Every string in deadends and the string target will be a string of 4 digits from the 10,000 possibilities ‘0000’ to ‘9999’.</p>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
+<li>one to eight sub nodes 4 digits 2 directions</li>
+<li>remember when bfs use visited to duplicate</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><p>Time complexity: O(8 * 10000) </p>
+<p>Space complexity: O(10000 + D)d = dead.len</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">openLock</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; deadends, <span class="built_in">string</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt;dict(deadends.<span class="built_in">begin</span>(), deadends.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt;visited;</span><br><span class="line">        visited.emplace(<span class="string">"0000"</span>);</span><br><span class="line">        <span class="keyword">if</span> (dict.count(target) || dict.count(<span class="string">"0000"</span>)) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="built_in">string</span>&gt; q;</span><br><span class="line">        q.push(<span class="string">"0000"</span>);</span><br><span class="line">        <span class="keyword">int</span> <span class="built_in">step</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> <span class="built_in">size</span> = q.<span class="built_in">size</span>();</span><br><span class="line">            <span class="built_in">step</span>++;</span><br><span class="line">            <span class="keyword">while</span> (<span class="built_in">size</span>--) &#123;</span><br><span class="line">                <span class="built_in">string</span> w = q.front(); q.pop();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">-1</span>; j &lt;= <span class="number">1</span>; j += <span class="number">2</span>)&#123;</span><br><span class="line">                        <span class="built_in">string</span> next = w;         <span class="comment">// 不用改回来w了</span></span><br><span class="line">                        next[i] = (w[i] - <span class="string">'0'</span> + j + <span class="number">10</span>) % <span class="number">10</span> + <span class="string">'0'</span>;</span><br><span class="line">                        <span class="keyword">if</span> (next == target) <span class="keyword">return</span> <span class="built_in">step</span>;</span><br><span class="line">                        <span class="keyword">if</span> (dict.count(next) || visited.count(next)) <span class="keyword">continue</span>;</span><br><span class="line">                        q.push(next);</span><br><span class="line">                        visited.emplace(next);   <span class="comment">//跟word ladder dict.erase(w) 一样</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Graph</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/31/LeetCode-752-Open-the-Lock/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-126-Word-Ladder-II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1020,101 +1117,9 @@
 
 
   
-    <article id="post-LeetCode-77-Combinations" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/28/LeetCode-77-Combinations/">LeetCode 77. Combinations</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/28/LeetCode-77-Combinations/" class="archive-article-date">
-  	<time datetime="2020-07-28T10:36:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given two integers n and k, return all possible combinations of k numbers out of 1 … n.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><p>Input: n = 4, k = 2<br>Output:<br>[<br>  [2,4],<br>  [3,4],<br>  [2,3],<br>  [1,2],<br>  [1,3],<br>  [1,4],<br>]</p>
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time: O(c(n,k))</li>
-<li>Space: O(c(n,k))</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">combine</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; cur;</span><br><span class="line">        dfs(n, k, <span class="number">0</span>, <span class="number">1</span>, cur, ans);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k, <span class="keyword">int</span> d, <span class="keyword">int</span> s, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; cur, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; ans)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (d == k) &#123;</span><br><span class="line">            ans.push_back(cur);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = s; i &lt;= n; i++) &#123;</span><br><span class="line">            cur.push_back(i);</span><br><span class="line">            dfs(n, k, d + <span class="number">1</span>, i + <span class="number">1</span>, cur, ans);</span><br><span class="line">            cur.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Combination</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Recursion</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/28/LeetCode-77-Combinations/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
