@@ -148,6 +148,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-85-Maximal-Rectangle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/23/LeetCode-85-Maximal-Rectangle/">LeetCode 85. Maximal Rectangle</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/23/LeetCode-85-Maximal-Rectangle/" class="archive-article-date">
+  	<time datetime="2020-07-22T21:32:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Descrption"><a href="#Descrption" class="headerlink" title="Descrption"></a>Descrption</h2><p>Given a 2D binary matrix filled with 0’s and 1’s, find the largest rectangle containing only 1’s and return its area.</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><blockquote>
+<p>Input:<br>[<br>[“1”,”0”,”1”,”0”,”0”],<br>[“1”,”0”,”1”,”1”,”1”],<br>[“1”,”1”,”1”,”1”,”1”],<br>[“1”,”0”,”0”,”1”,”0”]<br>]<br>Output: 6</p>
+</blockquote>
+<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><p><a href="https://www.z4a.net/image/T4T9u2" target="_blank" rel="noopener"><img src="https://www.z4a.net/images/2020/07/23/_20200723041737.png" alt="_20200723041737.png"></a></p>
+<p><img src="https://pic.leetcode-cn.com/aabb1b287134cf950aa80526806ef4025e3920d57d237c0369ed34fae83e2690-image.png" alt="lcc"></p>
+<ol>
+<li>Bruce force for a certain height find the max width. o(n^2) Space: (o(1))</li>
+<li>Trade off space to better time complexity we find when the next column is lower we can fix the right edge the scheme looks like stack and here is a mono stack</li>
+<li>The width should be i - (pop(); then top() +1)</li>
+<li>Use sentiniel (similar to dummy nodes) not to judge empty and at the end.</li>
+<li>leetcode 84.</li>
+</ol>
+<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
+<li>Time Complexity: O(n) (n is num of all char)</li>
+<li>Space Complexity: O(n)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximalRectangle</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!matrix.<span class="built_in">size</span>()) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> area = <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">heights</span><span class="params">(matrix[<span class="number">0</span>].<span class="built_in">size</span>())</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> row = <span class="number">0</span>; row &lt; matrix.<span class="built_in">size</span>(); row++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> col = <span class="number">0</span>; col &lt; matrix[<span class="number">0</span>].<span class="built_in">size</span>(); col++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (matrix[row][col] == <span class="string">'1'</span>) heights[col]++;</span><br><span class="line">                <span class="keyword">else</span> heights[col] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            area = <span class="built_in">max</span>(area, largestRectangleArea(heights));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> area;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// heights.insert(heights.begin(), 0);</span></span><br><span class="line">        heights.push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">        <span class="keyword">int</span> area = <span class="number">0</span>;</span><br><span class="line">        st.push(<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; heights.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (st.top() != <span class="number">-1</span> &amp;&amp; heights[i] &lt; heights[st.top()]) &#123;</span><br><span class="line">                <span class="keyword">int</span> cur = st.top(); st.pop();</span><br><span class="line">                area = <span class="built_in">max</span>(area, heights[cur] * (i - st.top() - <span class="number">1</span>));   <span class="comment">// i- (st.top() + 1) 顶到头</span></span><br><span class="line">            &#125;</span><br><span class="line">            st.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> area;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Stack</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mono Stack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/23/LeetCode-85-Maximal-Rectangle/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-284-341-146" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -990,103 +1093,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/07/21/LeetCode-23-Merge-k-Sorted-Lists/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-142-Linked-List-Cycle-II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/21/LeetCode-142-Linked-List-Cycle-II/">LeetCode 142. Linked List Cycle II</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/21/LeetCode-142-Linked-List-Cycle-II/" class="archive-article-date">
-  	<time datetime="2020-07-20T16:21:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="142-Linked-List-Cycle-II"><a href="#142-Linked-List-Cycle-II" class="headerlink" title="142. Linked List Cycle II"></a>142. Linked List Cycle II</h2><p>Given a linked list, return the node where the cycle begins. If there is no cycle, return null.</p>
-<p>To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail connects to. If pos is -1, then there is no cycle in the linked list.</p>
-<p>Note: Do not modify the linked list.</p>
-<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><p><img src="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png" alt="lc"></p>
-<blockquote>
-<p>Input: head = [3,2,0,-4], pos = 1<br>Output: tail connects to node index 1<br>Explanation: There is a cycle in the linked list, where tail connects to the second node.</p>
-</blockquote>
-<h2 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h2><ol>
-<li>To understand this solution, you just need to ask yourself these question.<br>Assume the distance from head to the start of the loop is x1<br>the distance from the start of the loop to the point fast and slow meet is x2<br>the distance from the point fast and slow meet to the start of the loop is x3<br>What is the distance fast moved? What is the distance slow moved? And their relationship?</li>
-</ol>
-<p>x1 + x2 + x3 + x2<br>x1 + x2<br>x1 + x2 + x3 + x2 = 2 (x1 + x2)<br>Thus x1 = x3<br>2. First use fast and slow pointer to check isCycle and find the pos that it meet and then one from head one from meeting if meet again this is the place.</p>
-<h2 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h2><ul>
-<li>Time complexity: O(n)</li>
-<li>Space complexity: O(1)</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">bool</span> iscycle = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (!head || !head-&gt;next)                       <span class="comment">//important</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* slow = head-&gt;next, *fast = head-&gt;next-&gt;next, *meeting = <span class="keyword">new</span> ListNode();  <span class="comment">//important</span></span><br><span class="line">        <span class="keyword">while</span>(slow &amp;&amp; fast &amp;&amp; fast-&gt;next) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slow == fast) &#123;</span><br><span class="line">                meeting = slow;</span><br><span class="line">                iscycle = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!iscycle) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* l1 = head, *l2 = meeting;</span><br><span class="line">        <span class="keyword">while</span>(l1 &amp;&amp; l2) &#123;</span><br><span class="line">            <span class="keyword">if</span> (l1 == l2)</span><br><span class="line">                <span class="keyword">return</span> l1;</span><br><span class="line">            l1 = l1-&gt;next;</span><br><span class="line">            l2 = l2-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*To understand this solution, you just need to ask yourself these question.</span></span><br><span class="line"><span class="comment">Assume the distance from head to the start of the loop is x1</span></span><br><span class="line"><span class="comment">the distance from the start of the loop to the point fast and slow meet is x2</span></span><br><span class="line"><span class="comment">the distance from the point fast and slow meet to the start of the loop is x3</span></span><br><span class="line"><span class="comment">What is the distance fast moved? What is the distance slow moved? And their relationship?</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">x1 + x2 + x3 + x2</span></span><br><span class="line"><span class="comment">x1 + x2</span></span><br><span class="line"><span class="comment">x1 + x2 + x3 + x2 = 2 (x1 + x2)</span></span><br><span class="line"><span class="comment">Thus x1 = x3</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Finally got the idea.*/</span></span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Two Pointer</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Linked List</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/21/LeetCode-142-Linked-List-Cycle-II/">Read More >></a>
         </p>
       
 
